@@ -3,3 +3,6 @@
 
 # production
 /build
+
+# API key
+src/keys
