@@ -7,6 +7,7 @@ import { fetchWeather, setCity } from "./SearchSlice.ts";
 
 const SearchComponent = () => {
     const dispatch = useAppDispatch();
+
     const [inputValue, setInputValue] = useState<string>('');
 
     const handleClickSearch = () => {
@@ -18,7 +19,7 @@ const SearchComponent = () => {
             setInputValue('');
         } else {
             alert('Неверный ввод'); // позже заменить на стилизованный алерт, либо еще как-либо обозначить неверный ввод в поле
-            setTimeout(() => setInputValue(''), 1000);
+            setInputValue('');
         }
     };
 
@@ -34,23 +35,30 @@ const SearchComponent = () => {
     };
 
     return (
-        <SearchLabel htmlFor="search-input">
-            <SearchGpsImg src={gpsImg} alt="Локация" />
-            <SearchInput
-                type="text" 
-                id="search-input"
-                placeholder="Введите название локации"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-            />
-            <SearchButton onClick={handleClickSearch}>
-                <SearchLoupeImg src={loupeImg} alt="Поиск" />
-            </SearchButton>
-        </SearchLabel>
+        <SearchForm onSubmit={(e) => e.preventDefault()}>
+            <SearchLabel htmlFor="search-input">
+                <SearchGpsImg src={gpsImg} alt="Локация" />
+                <SearchInput
+                    type="text" 
+                    id="search-input"
+                    placeholder="Введите название локации"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                />
+                <SearchButton onClick={handleClickSearch}>
+                    <SearchLoupeImg src={loupeImg} alt="Поиск" />
+                </SearchButton>
+            </SearchLabel>
+        </SearchForm>
     )
 };
 
 export default SearchComponent;
+
+const SearchForm = styled.form`
+    width: 100%;
+    margin-top: -0.3rem;
+`;
 
 const SearchLabel = styled.label`
     display: flex;

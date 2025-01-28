@@ -1,19 +1,28 @@
 import React from "react";
-import styled from "styled-components";
 import SearchComponent from "../features/search/SearchComponent.tsx";
+import Error404 from "./Error404.tsx";
+import { keyframes } from "styled-components";
 
 const Display = () => {
 
     return (
-        <SearchForm onSubmit={(e) => e.preventDefault()}>
+        <>
             <SearchComponent />
-        </SearchForm>
+            <Error404 fadeIn={fadeIn} />
+        </>
     )
 };
 
-export default Display;
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+    scale: 0;
+  }
 
-const SearchForm = styled.form`
-    width: 100%;
-    margin-top: -0.3rem;
+  to {
+    opacity: 1;
+    scale: 1;
+  }
 `;
+
+export default Display;

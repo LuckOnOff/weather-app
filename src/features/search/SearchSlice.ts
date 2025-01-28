@@ -5,6 +5,7 @@ interface WeatherState {
   data: unknown;
   loading: boolean;
   error: string | null;
+  successfully: boolean | null;
   city: string;
 }
 
@@ -12,6 +13,7 @@ const initialState: WeatherState = {
   data: null,
   loading: false,
   error: null,
+  successfully: null,
   city: '',
 };
 
@@ -44,14 +46,17 @@ const searchSlice = createSlice({
     builder
       .addCase(fetchWeather.pending, (state) => {
         state.loading = true;
+        state.successfully = null;
         state.error = null;
       })
       .addCase(fetchWeather.fulfilled, (state, action) => {
         state.loading = false;
+        state.successfully = true;
         state.data = action.payload;
       })
       .addCase(fetchWeather.rejected, (state, action) => {
         state.loading = false;
+        state.successfully = false;
         state.error = action.error.message || 'Произошла ошибка получения данных';
       });
   },
