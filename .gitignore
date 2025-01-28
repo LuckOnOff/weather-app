@@ -6,3 +6,6 @@
 
 # API key
 src/keys
+
+# .env
+.env

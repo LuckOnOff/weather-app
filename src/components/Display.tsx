@@ -5,7 +5,7 @@ import SearchComponent from "../features/search/SearchComponent.tsx";
 const Display = () => {
 
     return (
-        <SearchForm>
+        <SearchForm onSubmit={(e) => e.preventDefault()}>
             <SearchComponent />
         </SearchForm>
     )
