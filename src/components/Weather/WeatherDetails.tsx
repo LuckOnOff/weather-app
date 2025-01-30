@@ -137,7 +137,7 @@ const TempFeelsLikeSpan = styled.span`
 const ItemSpan = styled.span`
     display: flex;
     align-items: center;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
 `;
 
 const WindSpeedContainer = styled.div`

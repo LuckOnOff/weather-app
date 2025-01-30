@@ -1,18 +1,21 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { keyframes } from "styled-components";
 import SearchComponent from "../features/search/SearchComponent.tsx";
-import Error404 from "./Error404.tsx";
-import SuccessfullyResponse from "./Weather/Weather.tsx";
+import Spinner from "./UI/Spinner.tsx";
+
+const Error404 = lazy(() => import("./Error404.tsx"));
+const Weather = lazy(() => import("./Weather/Weather.tsx"));
 
 const Display = () => {
-
     return (
         <>
             <SearchComponent />
-            <Error404 fadeIn={fadeIn} />
-            <SuccessfullyResponse fadeIn={fadeIn} />
+            <Suspense fallback={<Spinner />}>
+                <Error404 fadeIn={fadeIn} />
+                <Weather fadeIn={fadeIn} />
+            </Suspense>
         </>
-    )
+    );
 };
 
 const fadeIn = keyframes`
