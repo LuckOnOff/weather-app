@@ -1,6 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import img404 from "../img/error404.svg";
+import img404 from "../assets/img/error404.svg";
 import { useAppSelector } from "../hooks/useAppSelector.ts";
 import { Keyframes } from "styled-components/dist/types";
 import { FadeInProp } from "../types/FadeInProp.ts";

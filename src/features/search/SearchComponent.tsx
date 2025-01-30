@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import gpsImg from "../../img/gps.svg";
-import loupeImg from "../../img/zoom.svg";
 import { useAppDispatch } from "../../hooks/useAppDispatch.ts";
 import { fetchWeather, setCity } from "./SearchSlice.ts";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
+import gpsImg from "../../assets/img/gps.svg";
+import loupeImg from "../../assets/img/zoom.svg";
 
 const SearchComponent = () => {
     const dispatch = useAppDispatch();

@@ -1,7 +1,8 @@
 import React from "react";
+import { keyframes } from "styled-components";
 import SearchComponent from "../features/search/SearchComponent.tsx";
 import Error404 from "./Error404.tsx";
-import { keyframes } from "styled-components";
+import SuccessfullyResponse from "./Weather/Weather.tsx";
 
 const Display = () => {
 
@@ -9,6 +10,7 @@ const Display = () => {
         <>
             <SearchComponent />
             <Error404 fadeIn={fadeIn} />
+            <SuccessfullyResponse fadeIn={fadeIn} />
         </>
     )
 };
