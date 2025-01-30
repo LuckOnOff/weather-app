@@ -1,10 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import img404 from "../img/error404.svg";
-import { Keyframes } from "styled-components/dist/types";
 import { useAppSelector } from "../hooks/useAppSelector.ts";
+import { Keyframes } from "styled-components/dist/types";
+import { FadeInProp } from "../types/FadeInProp.ts";
 
-const Error404 = ({ fadeIn }: Error404Props) => {
+const Error404 = ({ fadeIn }: FadeInProp) => {
     const { error } = useAppSelector((state) => state.weather);
 
     return (
@@ -19,22 +20,24 @@ const Error404 = ({ fadeIn }: Error404Props) => {
 
 export default Error404;
 
-interface Error404Props {
-    fadeIn: Keyframes;
+interface ContainerProps {
+    $error: string | null;
+    $fadeIn: Keyframes;
 };
 
-const Container = styled.section<{ $error: string | null; $fadeIn: Keyframes }>`
+const Container = styled.section<ContainerProps>`
     display: ${({ $error }) => $error ? 'flex' : 'none'};
     opacity: 0;
     scale: 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    transition: 0.5s linear;
+    padding: 0.5rem;
 
    ${({ $error, $fadeIn }) => $error &&
         css` // для интерполяции
             animation: 0.5s ${$fadeIn} forwards;
-            animation-delay: 0.5s;
     `}
 `;
 

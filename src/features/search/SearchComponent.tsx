@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import gpsImg from "../../img/gps.svg";
 import loupeImg from "../../img/zoom.svg";
 import { useAppDispatch } from "../../hooks/useAppDispatch.ts";
 import { fetchWeather, setCity } from "./SearchSlice.ts";
+import { useAppSelector } from "../../hooks/useAppSelector.ts";
 
 const SearchComponent = () => {
     const dispatch = useAppDispatch();
+    const { data } = useAppSelector((state) => state.weather);
 
     const [inputValue, setInputValue] = useState<string>('');
+
+    useEffect(() => {
+        if(data) {
+            setInputValue(data.city.name);
+        }
+
+        // добавить проверку на inputValue === data.city.name и сделать флаг для отправки запроса
+    }, [data]);
 
     const handleClickSearch = () => {
         const value = validationInput();
@@ -16,7 +26,6 @@ const SearchComponent = () => {
         if (value) {
             dispatch(setCity(value));
             dispatch(fetchWeather(value));
-            setInputValue('');
         } else {
             alert('Неверный ввод'); // позже заменить на стилизованный алерт, либо еще как-либо обозначить неверный ввод в поле
             setInputValue('');
@@ -62,6 +71,7 @@ const SearchForm = styled.form`
 
 const SearchLabel = styled.label`
     display: flex;
+    justify-content: center;
 `;
 
 const SearchGpsImg = styled.img`
