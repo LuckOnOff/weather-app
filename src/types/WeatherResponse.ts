@@ -51,7 +51,7 @@ interface Sys {
     pod: string;
 };
 
-interface List {
+export interface List {
     dt: number;
     main: Main;
     weather: Weather[];

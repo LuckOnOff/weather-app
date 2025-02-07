@@ -6,6 +6,7 @@ import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import { FadeInProp } from "../../types/FadeInProp.ts";
 import { Keyframes } from "styled-components/dist/types";
 import WeatherDetails from "./WeatherDetails.tsx";
+import ForecastSlider from "../ForecastSlider/ForecastSlider.tsx";
 
 const SuccessfullyResponse = ({ fadeIn }: FadeInProp) => {
     const { data, loading, successfully } = useAppSelector((state) => state.weather);
@@ -22,6 +23,7 @@ const SuccessfullyResponse = ({ fadeIn }: FadeInProp) => {
         <Container $successfully={successfully} $fadeIn={fadeIn}>
             <WeatherSummary />
             <WeatherDetails />
+            <ForecastSlider />
         </Container>
     );
 };
@@ -44,6 +46,7 @@ const Container = styled.section<ContainerProps>`
     opacity: 0;
     scale: 0;
     transition: 0.5s linear;
+    position: relative;
 
      ${({ $successfully, $fadeIn }) => $successfully &&
         css` // для интерполяции
