@@ -1,21 +1,7 @@
-import thunderstorm from '../assets/img/thunderstorm.svg';
-import drizzle from '../assets/img/drizzle.svg';
-import rain from "../assets/img/rain.svg";
-import snow from '../assets/img/snow.svg';
-import fog from '../assets/img/fog.svg';
-import sun from '../assets/img/sun.svg';
-import sunCloud from "../assets/img/sunCloud.svg";
+import { getDayOrNigthImgObj } from "./getDayOrNightImgObj.ts";
 
-export function getWeatherImgFromId(weatherId: number): string {
-    const weatherConditions = {
-        1: thunderstorm,
-        2: drizzle,
-        3: rain,
-        4: snow,
-        5: fog,
-        6: sun,
-        7: sunCloud
-    };   
+export function getWeatherImgFromId(weatherId: number, isDay: boolean): string {
+    const weatherConditions = getDayOrNigthImgObj(isDay);
     
     let weatherType: number = 0;
     
@@ -34,6 +20,6 @@ export function getWeatherImgFromId(weatherId: number): string {
     } else if (weatherId >= 801 && weatherId <= 804) {
         weatherType = 7;
     }
-
+    
     return weatherConditions[weatherType];
 };

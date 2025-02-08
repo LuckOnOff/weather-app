@@ -61,6 +61,8 @@ const Container = styled.section<ContainerProps>`
 
 const BottomContainer = styled.div`
     display: flex;
+    justify-content: space-around;
+    width: 100%;
 
     @media (max-width: 440px) {
         flex-direction: column;
