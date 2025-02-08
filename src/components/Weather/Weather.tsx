@@ -9,14 +9,10 @@ import WeatherDetails from "./WeatherDetails.tsx";
 import ForecastSlider from "../ForecastSlider/ForecastSlider.tsx";
 
 const SuccessfullyResponse = ({ fadeIn }: FadeInProp) => {
-    const { data, loading, successfully } = useAppSelector((state) => state.weather);
+    const { loading, successfully } = useAppSelector((state) => state.weather);
 
-    if (loading) {
+    if(loading) {
         return <Spinner />;
-    };
-
-    if (!data) {
-        return null;
     };
 
     return (

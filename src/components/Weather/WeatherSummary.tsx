@@ -4,16 +4,16 @@ import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import { getWeatherImgFromId } from "../../utils/getWeatherImg.ts";
 
 const WeatherSummary = () => {
-    const { data } = useAppSelector((state) => state.weather);
+    const { selectedForecast, activeIndex } = useAppSelector((state) => state.weather);
 
-    if (!data || !data.list || data.list.length === 0) {
+    if (!selectedForecast || selectedForecast.length === 0) {
         return <StyledWeatherSummary>Нет данных о погоде</StyledWeatherSummary>;
-    };
+    }
 
-    const weatherData = data.list[0];
+    const weatherData = selectedForecast[activeIndex];
 
     const currentTempItem = Math.trunc(weatherData.main.temp);
-    const currentTempText = (currentTempItem > 0 ? '+' + currentTempItem : currentTempItem)  +  '°';
+    const currentTempText = (currentTempItem > 0 ? '+' + currentTempItem : currentTempItem) + '°';
 
     const imgId: number = weatherData.weather[0].id;
     const imgSrc = getWeatherImgFromId(imgId);
@@ -23,14 +23,10 @@ const WeatherSummary = () => {
     return (
         <StyledWeatherSummary>
             <WeatherImg src={imgSrc} alt="Погода сейчас" />
-                <CurrentTemp>
-                    {currentTempText}
-                </CurrentTemp>
-                <WeatherType>
-                    {weatherTypeText}
-                </WeatherType>
+            <CurrentTemp>{currentTempText}</CurrentTemp>
+            <WeatherType>{weatherTypeText}</WeatherType>
         </StyledWeatherSummary>
-    )
+    );
 };
 
 export default WeatherSummary;
@@ -58,5 +54,5 @@ const WeatherType = styled.p`
 const CurrentTemp = styled.p`
     margin-top: 0.5rem;
     font-size: 2.5rem;
-    font-weight: 500;
+    font-weight: 600;
 `;

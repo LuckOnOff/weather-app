@@ -10,49 +10,52 @@ import arrowWindDirection from "../../assets/img/windDirection.svg";
 import precipitation from "../../assets/img/precipitation.svg";
 
 const WeatherDetails = () => {
-    const { data } = useAppSelector((state) => state.weather);
+    const { selectedForecast, activeIndex } = useAppSelector((state) => state.weather);
 
-    if (!data || !data.list || data.list.length === 0) {
+    if (!selectedForecast || selectedForecast.length === 0) {
         return <Details>Нет данных о погоде</Details>;
     }
 
-    const weatherData = data.list[0];
+    const weatherData = selectedForecast[activeIndex];
 
     const currentTempFeelsLikeItem = Math.trunc(weatherData.main.feels_like);
-    const currentTempFeelsLikeText = (currentTempFeelsLikeItem > 0 ? '+' + currentTempFeelsLikeItem : currentTempFeelsLikeItem)  +  '°';
-    
-    const windDeg: number = weatherData.wind.deg;
+    const currentTempFeelsLikeText = 
+    (currentTempFeelsLikeItem > 0 ? "+" + currentTempFeelsLikeItem : currentTempFeelsLikeItem) + "°";
+
+    const windDeg = weatherData.wind.deg;
     const { windDirection, transformDeg } = getWindDirection(windDeg);
-    const windSpeedText = weatherData.wind.speed.toFixed(1) + ' м/с, ' + windDirection;
+    const windSpeedText = weatherData.wind.speed.toFixed(1) + " м/с, " + windDirection;
     const gustWindSpeed = weatherData.wind.gust.toFixed(1) + ' м/с';
-    
-    const humidityText = weatherData.main.humidity + '%';
 
-    const pressureText = Math.round(weatherData.main.grnd_level * 0.750062) + ' мм. рт. ст.';
+    const humidityText = weatherData.main.humidity + "%";
 
-    const precipitationText = weatherData.pop * 100 + '%';
+    const pressureText = Math.round(weatherData.main.grnd_level * 0.750062) + " мм. рт. ст.";
 
-    const cloudinessText = weatherData.clouds.all + '%';
+    const precipitationText = weatherData.pop * 100 + "%";
+
+    const cloudinessText = weatherData.clouds.all + "%";
 
     const repeatDetailsElements = [
-        {id: 0, title: 'влажность', src: humidityImg, alt: 'Влажность', text: humidityText},
-        {id: 1, title: 'давление на уровне земли', src: pressureImg, alt: 'Давление', text: pressureText},
-        {id: 2, title: 'вероятность осадков', src: precipitation, alt: 'Вероятность осадков', text: precipitationText},
-        {id: 3, title: 'облачность', src: cloudinessImg, alt: 'Облачность', text: cloudinessText},
+        { id: 0, title: "влажность", src: humidityImg, alt: "Влажность", text: humidityText },
+        { id: 1, title: "давление на уровне земли", src: pressureImg, alt: "Давление", text: pressureText },
+        { id: 2, title: "вероятность осадков", src: precipitation, alt: "Вероятность осадков", text: precipitationText },
+        { id: 3, title: "облачность", src: cloudinessImg, alt: "Облачность", text: cloudinessText },
     ];
 
     return (
         <Details>
             <DetailsList>
                 <DetailsListItem>
-                    <ItemSpan>ощущается как <TempFeelsLikeSpan>{currentTempFeelsLikeText}</TempFeelsLikeSpan></ItemSpan>
+                    <ItemSpan>
+                        ощущается как <TempFeelsLikeSpan>{currentTempFeelsLikeText}</TempFeelsLikeSpan>
+                    </ItemSpan>
                 </DetailsListItem>
                 <DetailsListItem title="скорость ветра">
                     <WindSpeedContainer>
                         <ItemImg src={windSpeedImg} alt="Скорость ветра" />
                         <ItemSpan>
                             {windSpeedText}
-                            <ArrowWindDirection src={arrowWindDirection} alt='Направление ветра' $transformDeg={transformDeg} />
+                            <ArrowWindDirection src={arrowWindDirection} alt="Направление ветра" $transformDeg={transformDeg} />
                         </ItemSpan>
                     </WindSpeedContainer>
                     <GustWindSpeedP>порывы до {gustWindSpeed}</GustWindSpeedP>
@@ -65,7 +68,7 @@ const WeatherDetails = () => {
                 ))}
             </DetailsList>
         </Details>
-    )
+    );
 };
 
 export default WeatherDetails;

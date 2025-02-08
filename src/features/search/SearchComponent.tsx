@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAppDispatch } from "../../hooks/useAppDispatch.ts";
-import { fetchWeather, setCity } from "./SearchSlice.ts";
+import { fetchWeather, setActiveIndex } from "../weather/weatherSlice.ts";
+import { setCity } from "./searchSlice.ts";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import gpsImg from "../../assets/img/gps.svg";
 import loupeImg from "../../assets/img/zoom.svg";
@@ -24,6 +25,7 @@ const SearchComponent = () => {
         const value = validationInput();
 
         if (value) {
+            dispatch(setActiveIndex(0));
             dispatch(setCity(value));
             dispatch(fetchWeather(value));
         } else {
