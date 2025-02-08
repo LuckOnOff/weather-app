@@ -3,6 +3,7 @@ import styled from "styled-components";
 import SliderContent from "./SliderContent.tsx";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import SliderArrows from "./SliderArrows.tsx";
+import { SelectedForecastLength } from "../../types/SelectedForecastLength.ts";
 
 const WeatherForecastSlider = () => {
     const sliderSection = useRef<HTMLDivElement | null>(null);
@@ -10,12 +11,12 @@ const WeatherForecastSlider = () => {
 
     if (!selectedForecast) return null;
 
-    const todayLength = selectedForecast.length;
+    const selectedForecastLength = selectedForecast.length;
 
     return (
         <Container>
             <SliderArrows sliderSection={sliderSection} />
-            <SliderContainer ref={sliderSection} $todayLength={todayLength}>
+            <SliderContainer ref={sliderSection} $selectedForecastLength={selectedForecastLength}>
                 <SliderContent />
             </SliderContainer>
         </Container>
@@ -23,10 +24,6 @@ const WeatherForecastSlider = () => {
 };
 
 export default WeatherForecastSlider;
-
-interface TodayLength {
-    $todayLength: number;
-};
 
 const Container = styled.section`
     display: flex;
@@ -39,7 +36,7 @@ const Container = styled.section`
     }
 `;
 
-const SliderContainer = styled.section<TodayLength>`
+const SliderContainer = styled.section<SelectedForecastLength>`
     display: flex;
     overflow-x: hidden;
     scrollbar-width: none;
@@ -53,5 +50,5 @@ const SliderContainer = styled.section<TodayLength>`
         overflow-x: visible;
     }
 
-    ${({ $todayLength }) => $todayLength <= 3 && `justify-content: center;`}
+    ${({ $selectedForecastLength }) => ($selectedForecastLength || 0) <= 3 && `justify-content: center;`}
 `;

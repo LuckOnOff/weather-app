@@ -44,7 +44,7 @@ const weatherSlice = createSlice({
   initialState,
   reducers: {
     setActiveIndex(state, action: PayloadAction<number>) {
-        state.activeIndex = action.payload;
+      state.activeIndex = action.payload;
     },
     setWeatherData(state, action: PayloadAction<WeatherResponse>) {
       state.data = action.payload;
@@ -74,6 +74,7 @@ const weatherSlice = createSlice({
       .addCase(fetchWeather.rejected, (state, action) => {
         state.loading = false;
         state.successfully = false;
+        state.data = null;
         state.error = action.error.message || 'Произошла ошибка получения данных';
       });
   },

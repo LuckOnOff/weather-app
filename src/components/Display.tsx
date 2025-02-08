@@ -7,27 +7,27 @@ const Error404 = lazy(() => import("./Error404.tsx"));
 const Weather = lazy(() => import("./Weather/Weather.tsx"));
 
 const Display = () => {
-    return (
-        <>
-            <SearchComponent />
-            <Suspense fallback={<Spinner />}>
-                <Error404 fadeIn={fadeIn} />
-                <Weather fadeIn={fadeIn} />
-            </Suspense>
-        </>
-    );
+	return (
+		<>
+			<SearchComponent />
+			  <Suspense fallback={<Spinner />}>
+				<Error404 fadeIn={fadeIn} />
+				<Weather fadeIn={fadeIn} />
+			</Suspense>
+		</>
+	);
 };
 
 const fadeIn = keyframes`
-  from {
-    opacity: 0;
-    scale: 0;
-  }
+	from {
+    	opacity: 0;
+    	scale: 0;
+	}
 
-  to {
-    opacity: 1;
-    scale: 1;
-  }
+  	to {
+   		opacity: 1;
+    	scale: 1;
+  	}
 `;
 
 export default Display;

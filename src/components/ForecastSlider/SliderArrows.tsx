@@ -1,5 +1,7 @@
 import React, { RefObject, useCallback, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { useAppSelector } from "../../hooks/useAppSelector.ts";
+import { SelectedForecastLength } from "../../types/SelectedForecastLength.ts";
 
 const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
     const [scrollPosition, setScrollPosition] = useState<number>(0);
@@ -50,15 +52,20 @@ const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
         });
     }, [itemWidth, maxScroll]);
 
+    const { selectedForecast } = useAppSelector((state) => state.weather);
+    const selectedForecastLength = selectedForecast?.length;
+
     return (
         <>
             <LeftContainerArrow
+                $selectedForecastLength={selectedForecastLength}
                 $scrollPosition={scrollPosition} 
                 onClick={() => handleScroll("left")}
             >
                 <ArrowItem>&lsaquo;</ArrowItem>
             </LeftContainerArrow>
             <RightContainerArrow
+                $selectedForecastLength={selectedForecastLength}
                 $isLastSlide={isLastSlide} 
                 onClick={() => handleScroll("right")}
             >
@@ -74,11 +81,11 @@ interface SliderArrowsProps {
     sliderSection: RefObject<HTMLDivElement | null>;
 };
 
-interface ScrollPosition {
+interface ScrollPosition extends SelectedForecastLength {
     $scrollPosition: number;
 };
 
-interface IsLastSlide {
+interface IsLastSlide extends SelectedForecastLength {
     $isLastSlide: boolean;
 };
 
@@ -87,7 +94,7 @@ const BaseContainerArrow = css`
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 24.5rem;
+    top: 31.5rem;
     height: 10rem;
     width: 1.2rem;
     background: #e4e3e9;
@@ -107,6 +114,10 @@ const LeftContainerArrow = styled.div<ScrollPosition>`
     ${({ $scrollPosition }) => $scrollPosition === 0 && `
         display: none;
     `}
+
+    ${({ $selectedForecastLength }) => ($selectedForecastLength || 0) <= 3 && `
+        display: none;
+    `}
 `;
 
 const RightContainerArrow = styled.div<IsLastSlide>`
@@ -114,6 +125,10 @@ const RightContainerArrow = styled.div<IsLastSlide>`
     right: 0;
 
     ${({ $isLastSlide }) => $isLastSlide && `
+        display: none;
+    `}
+
+    ${({ $selectedForecastLength }) => ($selectedForecastLength || 0) <= 3 && `
         display: none;
     `}
 `;

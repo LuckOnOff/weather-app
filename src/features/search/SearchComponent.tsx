@@ -1,37 +1,48 @@
-import React, { useEffect, useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { useAppDispatch } from "../../hooks/useAppDispatch.ts";
 import { fetchWeather, setActiveIndex } from "../weather/weatherSlice.ts";
 import { setCity } from "./searchSlice.ts";
-import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import gpsImg from "../../assets/img/gps.svg";
 import loupeImg from "../../assets/img/zoom.svg";
+import { useAppSelector } from "../../hooks/useAppSelector.ts";
 
 const SearchComponent = () => {
     const dispatch = useAppDispatch();
-    const { data } = useAppSelector((state) => state.weather);
 
     const [inputValue, setInputValue] = useState<string>('');
 
-    useEffect(() => {
-        if(data) {
-            setInputValue(data.city.name);
-        }
+    const inputRef = useRef<HTMLInputElement | null>(null);
 
-        // добавить проверку на inputValue === data.city.name и сделать флаг для отправки запроса
-    }, [data]);
+    const { data } = useAppSelector((state) => state.weather);
+
+    const unFocusAndClearInput = () => {
+        setInputValue('');
+        
+        const input = inputRef.current;
+
+        if(input) {
+            input.blur();
+        }
+    };
 
     const handleClickSearch = () => {
         const value = validationInput();
-
-        if (value) {
+        
+        if(!value) {
+            setInputValue('');
+            alert('Неверный ввод'); // позже сделать стилизованное всплывающее окно и состояние к его появлению на экране
+            
+            return;
+        };
+        
+        if (value?.toLowerCase() !== data?.city.name.toLowerCase()) {
             dispatch(setActiveIndex(0));
             dispatch(setCity(value));
             dispatch(fetchWeather(value));
-        } else {
-            alert('Неверный ввод'); // позже заменить на стилизованный алерт, либо еще как-либо обозначить неверный ввод в поле
-            setInputValue('');
-        }
+        };
+        
+        unFocusAndClearInput();
     };
 
     const validationInput = () => {
@@ -54,6 +65,7 @@ const SearchComponent = () => {
                     id="search-input"
                     placeholder="Введите название локации"
                     value={inputValue}
+                    ref={inputRef}
                     onChange={(e) => setInputValue(e.target.value)}
                 />
                 <SearchButton onClick={handleClickSearch}>

@@ -14,6 +14,8 @@ const SliderContent = () => {
     const handleSelect = (index: number) => {
         dispatch(setActiveIndex(index));
         dispatch(setSelectedForecast(selectedForecast));
+        
+        window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     return (

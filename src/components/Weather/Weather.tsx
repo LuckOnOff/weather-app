@@ -7,6 +7,7 @@ import { FadeInProp } from "../../types/FadeInProp.ts";
 import { Keyframes } from "styled-components/dist/types";
 import WeatherDetails from "./WeatherDetails.tsx";
 import ForecastSlider from "../ForecastSlider/ForecastSlider.tsx";
+import Title from "../Title.tsx";
 
 const SuccessfullyResponse = ({ fadeIn }: FadeInProp) => {
     const { loading, successfully } = useAppSelector((state) => state.weather);
@@ -17,8 +18,11 @@ const SuccessfullyResponse = ({ fadeIn }: FadeInProp) => {
 
     return (
         <Container $successfully={successfully} $fadeIn={fadeIn}>
-            <WeatherSummary />
-            <WeatherDetails />
+            <Title/>
+            <BottomContainer>
+                <WeatherSummary />
+                <WeatherDetails />
+            </BottomContainer>
             <ForecastSlider />
         </Container>
     );
@@ -33,6 +37,7 @@ interface ContainerProps {
 
 const Container = styled.section<ContainerProps>`
     display: ${({ $successfully }) => $successfully ? 'flex' : 'none'};
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
@@ -51,5 +56,13 @@ const Container = styled.section<ContainerProps>`
 
     @media (max-width: 440px) {
         justify-content: center;
+    }
+`;
+
+const BottomContainer = styled.div`
+    display: flex;
+
+    @media (max-width: 440px) {
+        flex-direction: column;
     }
 `;
