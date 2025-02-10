@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import styled from "styled-components";
 import { useAppDispatch } from "../../hooks/useAppDispatch.ts";
 import { fetchWeather, setActiveIndex } from "../weather/weatherSlice.ts";
@@ -10,51 +10,46 @@ import { useAppSelector } from "../../hooks/useAppSelector.ts";
 const SearchComponent = () => {
     const dispatch = useAppDispatch();
 
-    const [inputValue, setInputValue] = useState<string>('');
-
     const inputRef = useRef<HTMLInputElement | null>(null);
 
-    const { data } = useAppSelector((state) => state.weather);
+    const cityName = useAppSelector((state) => state.weather.data?.city.name);
 
     const unFocusAndClearInput = () => {
-        setInputValue('');
-        
-        const input = inputRef.current;
-
-        if(input) {
-            input.blur();
+        if (inputRef.current) {
+          inputRef.current.value = '';
+          inputRef.current.blur();
         }
     };
 
     const handleClickSearch = () => {
         const value = validationInput();
-        
-        if(!value) {
-            setInputValue('');
-            alert('Неверный ввод'); // позже сделать стилизованное всплывающее окно и состояние к его появлению на экране
-            
-            return;
-        };
-        
-        if (value?.toLowerCase() !== data?.city.name.toLowerCase()) {
-            dispatch(setActiveIndex(0));
-            dispatch(setCity(value));
-            dispatch(fetchWeather(value));
-        };
-        
-        unFocusAndClearInput();
-    };
 
-    const validationInput = () => {
-        const pattern = /[a-z а-я]/gi;
-        const trimmedValue = inputValue.trim();
+        if (!value) {
+          alert('Неверный ввод'); // позже заменить на стилизованное всплывающее окно
 
-        if(trimmedValue === '' || !isNaN(+trimmedValue)) {
-            return null;
+          return;
         }
 
-        return inputValue.match(pattern)?.join('') || null;
-    };
+        if (value?.toLowerCase() !== cityName?.toLowerCase()) {
+          dispatch(setActiveIndex(0));
+          dispatch(setCity(value));
+          dispatch(fetchWeather(value));
+        }
+        
+        unFocusAndClearInput();
+      };
+
+    const validationInput = () => {
+        if(!inputRef.current) return;
+
+        const trimmedValue = inputRef.current.value.trim();
+
+        if (!trimmedValue || !/[a-zа-я]/gi.test(trimmedValue)) {
+          return null;
+        }
+
+        return trimmedValue;
+      };
 
     return (
         <SearchForm onSubmit={(e) => e.preventDefault()}>
@@ -64,9 +59,7 @@ const SearchComponent = () => {
                     type="text" 
                     id="search-input"
                     placeholder="Введите название локации"
-                    value={inputValue}
                     ref={inputRef}
-                    onChange={(e) => setInputValue(e.target.value)}
                 />
                 <SearchButton onClick={handleClickSearch}>
                     <SearchLoupeImg src={loupeImg} alt="Поиск" />

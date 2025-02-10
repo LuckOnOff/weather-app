@@ -4,62 +4,80 @@ import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import { SelectedForecastLength } from "../../types/SelectedForecastLength.ts";
 
 const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
-    const [scrollPosition, setScrollPosition] = useState<number>(0);
-    const [itemWidth, setItemWidth] = useState<number>(0);
-    const [maxScroll, setMaxScroll] = useState<number>(0);
-    const [isLastSlide, setIsLastSlide] = useState<boolean>(false);
+    const [scrollState, setScrollState] = useState({
+        scrollPosition: 0,
+        itemWidth: 0,
+        maxScroll: 0,
+    });
 
     // функция для вычисления itemWidth в пикселях
-    const updateItemWidth = useCallback(() => {
+    const updateDimensions = useCallback(() => {
         const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
         const width = rootFontSize * 10; // размер в rem
-        setItemWidth(width * 3);
-    }, []);
+        const newItemWidth = width * 3;
     
-    // обновление максимального скролла
-    const updateMaxScroll = useCallback(() => {
+        setScrollState((prevState) => ({
+            ...prevState,
+            itemWidth: newItemWidth,
+        }));
+    
+        // проверка на null и обновление maxScroll
         if (sliderSection.current) {
-            setMaxScroll(sliderSection.current.scrollWidth - sliderSection.current.clientWidth);
+            const maxScroll = sliderSection.current.scrollWidth - sliderSection.current.clientWidth;
+
+            setScrollState((prevState) => ({
+                ...prevState,
+                maxScroll,
+            }));
         }
     }, [sliderSection]);
 
+    // обновление размеров и максимальный скролл
     useEffect(() => {
-        updateItemWidth();
-        updateMaxScroll();
+        updateDimensions();
 
-        window.addEventListener("resize", updateItemWidth);
-        window.addEventListener("resize", updateMaxScroll);
+        const handleResize = () => {
+            updateDimensions();
+        };
+
+        window.addEventListener("resize", handleResize);
 
         return () => {
-            window.removeEventListener("resize", updateItemWidth);
-            window.removeEventListener("resize", updateMaxScroll);
+            window.removeEventListener("resize", handleResize);
         };
-    }, [updateItemWidth, updateMaxScroll]);
+    }, [updateDimensions]);
 
-    useEffect(() => {
-        if (sliderSection.current) {
-            sliderSection.current.scrollTo({ left: scrollPosition, behavior: "smooth" });
-        }
+    const handleScroll = (direction: "left" | "right"): void => {
+        setScrollState((prevState) => {
+            const newPosition = direction === "left" ?
+                prevState.scrollPosition - prevState.itemWidth :
+                prevState.scrollPosition + prevState.itemWidth;
 
-        // проверка, достигли ли конца скролла
-        setIsLastSlide(scrollPosition >= maxScroll);
-    }, [scrollPosition, maxScroll, sliderSection]);
+            // обновление позиции скролла и соблюдение границ
+            if (sliderSection.current) {
+                sliderSection.current.scrollTo({
+                    left: Math.max(0, Math.min(newPosition, prevState.maxScroll)),
+                    behavior: "smooth",
+                });
+            }
 
-    const handleScroll = useCallback((direction: "left" | "right"): void => {
-        setScrollPosition((prev) => {
-            const newPosition = direction === "left" ? prev - itemWidth : prev + itemWidth;
-            return Math.max(0, Math.min(newPosition, maxScroll));
+            return {
+                ...prevState,
+                scrollPosition: Math.max(0, Math.min(newPosition, prevState.maxScroll)),
+            };
         });
-    }, [itemWidth, maxScroll]);
+    };
 
-    const { selectedForecast } = useAppSelector((state) => state.weather);
+    const selectedForecast = useAppSelector((state) => state.weather.selectedForecast);
     const selectedForecastLength = selectedForecast?.length;
+
+    const isLastSlide = scrollState.scrollPosition >= scrollState.maxScroll;
 
     return (
         <>
             <LeftContainerArrow
                 $selectedForecastLength={selectedForecastLength}
-                $scrollPosition={scrollPosition} 
+                $scrollPosition={scrollState.scrollPosition} 
                 onClick={() => handleScroll("left")}
             >
                 <ArrowItem>&lsaquo;</ArrowItem>

@@ -7,7 +7,7 @@ import { SelectedForecastLength } from "../../types/SelectedForecastLength.ts";
 
 const WeatherForecastSlider = () => {
     const sliderSection = useRef<HTMLDivElement | null>(null);
-    const { selectedForecast } = useAppSelector((state) => state.weather);
+    const selectedForecast = useAppSelector((state) => state.weather.selectedForecast);
 
     if (!selectedForecast) return null;
 

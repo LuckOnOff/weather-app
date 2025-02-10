@@ -10,30 +10,28 @@ import arrowWindDirection from "../../assets/img/windDirection.svg";
 import precipitation from "../../assets/img/precipitation.svg";
 
 const WeatherDetails = () => {
-    const { selectedForecast, activeIndex } = useAppSelector((state) => state.weather);
+    const selectedForecast = useAppSelector((state) => state.weather.selectedForecast);
+    const activeIndex = useAppSelector((state) => state.weather.activeIndex);
 
-    if (!selectedForecast || selectedForecast.length === 0) {
-        return <Details>Нет данных о погоде</Details>;
+    if (!selectedForecast?.length) {
+        return null;
     }
 
-    const weatherData = selectedForecast[activeIndex];
+    const weatherData = selectedForecast[activeIndex] ?? selectedForecast[0];
+    const { main, wind, clouds, pop } = weatherData;
 
-    const currentTempFeelsLikeItem = Math.trunc(weatherData.main.feels_like);
-    const currentTempFeelsLikeText = 
-    (currentTempFeelsLikeItem > 0 ? "+" + currentTempFeelsLikeItem : currentTempFeelsLikeItem) + "°";
+    const currentTempFeelsLikeItem = Math.trunc(main.feels_like);
+    const currentTempFeelsLikeText =
+        (currentTempFeelsLikeItem > 0 ? "+" + currentTempFeelsLikeItem : currentTempFeelsLikeItem) + "°";
 
-    const windDeg = weatherData.wind.deg;
-    const { windDirection, transformDeg } = getWindDirection(windDeg);
-    const windSpeedText = weatherData.wind.speed.toFixed(1) + " м/с, " + windDirection;
-    const gustWindSpeed = weatherData.wind.gust.toFixed(1) + ' м/с';
+    const { windDirection, transformDeg } = getWindDirection(wind.deg);
+    const windSpeedText = wind.speed.toFixed(1) + " м/с, " + windDirection;
+    const gustWindSpeed = wind.gust?.toFixed(1) + ' м/с' || "нет данных";
 
-    const humidityText = weatherData.main.humidity + "%";
-
-    const pressureText = Math.round(weatherData.main.grnd_level * 0.750062) + " мм. рт. ст.";
-
-    const precipitationText = weatherData.pop * 100 + "%";
-
-    const cloudinessText = weatherData.clouds.all + "%";
+    const humidityText = main.humidity + "%";
+    const pressureText = Math.round(main.grnd_level * 0.750062) + " мм. рт. ст.";
+    const precipitationText = pop * 100 + "%";
+    const cloudinessText = clouds.all + "%";
 
     const repeatDetailsElements = [
         { id: 0, title: "влажность", src: humidityImg, alt: "Влажность", text: humidityText },
@@ -41,6 +39,10 @@ const WeatherDetails = () => {
         { id: 2, title: "вероятность осадков", src: precipitation, alt: "Вероятность осадков", text: precipitationText },
         { id: 3, title: "облачность", src: cloudinessImg, alt: "Облачность", text: cloudinessText },
     ];
+
+    if (!selectedForecast) {
+        return <Details>Нет данных о погоде</Details>;
+    };
 
     return (
         <Details>

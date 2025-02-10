@@ -5,7 +5,8 @@ import Display from './components/Display.tsx';
 import { useAppSelector } from './hooks/useAppSelector.ts';
 
 function App() {
-    const { successfully, error } = useAppSelector((state) => state.weather);
+    const successfully = useAppSelector((state) => state.weather.successfully);
+    const error = useAppSelector((state) => state.weather.error);
 
     return (
       <>

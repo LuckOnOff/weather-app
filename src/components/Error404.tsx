@@ -6,7 +6,7 @@ import { Keyframes } from "styled-components/dist/types";
 import { FadeInProp } from "../types/FadeInProp.ts";
 
 const Error404 = ({ fadeIn }: FadeInProp) => {
-    const { error } = useAppSelector((state) => state.weather);
+    const error = useAppSelector((state) => state.weather.error);
 
     return (
         <Container $error={error} $fadeIn={fadeIn}>

@@ -3,7 +3,7 @@ import { useAppSelector } from "../hooks/useAppSelector.ts";
 import styled from "styled-components";
 
 const Title = () => {
-    const { data } = useAppSelector((state) => state.weather);
+    const data = useAppSelector((state) => state.weather.data);
 
     if(!data) return;
     /* 
