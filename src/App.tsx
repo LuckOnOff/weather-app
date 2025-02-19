@@ -11,7 +11,10 @@ function App() {
     return (
       <>
         <GlobalStyle />
-        <Container $successfully={successfully} $error={error}>
+        <Container 
+          $successfully={successfully} 
+          $error={error}
+        >
           <Display />
         </Container>
       </>
@@ -20,9 +23,13 @@ function App() {
 
 export default App;
 
-const Container = styled.section<{ $successfully: boolean | null; $error: string | null }>`
-    overflow: hidden;
-    width: ${({ $successfully }) => $successfully ? '35rem' : 'auto'};
+interface ContainerProps {
+  $successfully: boolean | null;
+  $error: string | null;
+};
+
+const Container = styled.section<ContainerProps>`
+    width: ${({ $successfully }) => $successfully ? '35rem' : ''};
     min-height: ${({ $successfully, $error }) => $successfully ? '26.5rem' : $error ? '26.5rem' : '3.7rem'};
     height: 100%;
     background: white;
