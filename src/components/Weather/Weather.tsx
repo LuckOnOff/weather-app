@@ -1,29 +1,32 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import WeatherSummary from "./WeatherSummary.tsx";
 import Spinner from "../UI/Spinner.tsx";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import { FadeInProp } from "../../types/FadeInProp.ts";
 import { Keyframes } from "styled-components/dist/types";
-import WeatherDetails from "./WeatherDetails.tsx";
 import ForecastSlider from "../ForecastSlider/ForecastSlider.tsx";
 import Title from "../Title.tsx";
+import CurrentWeather from "./CurrentWeather.tsx";
+import SelectedDayWeather from "./SelectedDayWeather.tsx";
+import BackToCurrentWeather from "../BackToCurrentWeather.tsx";
 
 const SuccessfullyResponse = ({ fadeIn }: FadeInProp) => {
     const loading = useAppSelector((state) => state.weather.loading);
     const successfully = useAppSelector((state) => state.weather.successfully);
 
-    if(loading) {
-        return <Spinner />;
-    };
+    const selectedDay = useAppSelector((state) => state.weather.selectedDay);
+
+    if(loading) return <Spinner />;
 
     return (
         <Container $successfully={successfully} $fadeIn={fadeIn}>
-            <Title/>
-            <BottomContainer>
-                <WeatherSummary />
-                <WeatherDetails />
-            </BottomContainer>
+            <Title />
+            <BackToCurrentWeather />
+            {selectedDay === null ?
+                <CurrentWeather />
+                :
+                <SelectedDayWeather />
+            }
             <ForecastSlider />
         </Container>
     );
@@ -57,15 +60,5 @@ const Container = styled.section<ContainerProps>`
 
     @media (max-width: 440px) {
         justify-content: center;
-    }
-`;
-
-const BottomContainer = styled.div`
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-
-    @media (max-width: 440px) {
-        flex-direction: column;
     }
 `;

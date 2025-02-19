@@ -1,1 +1,48 @@
-<?xml version="1.0" ?><svg data-name="Layer 1" id="Layer_1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><style>.cls-1{fill:#0baeff;}.cls-2,.cls-3,.cls-4{fill:none;stroke-linecap:round;}.cls-2{stroke:#0baeff;stroke-linejoin:round;stroke-width:12px;}.cls-3{stroke:#1441af;}.cls-3,.cls-4{stroke-miterlimit:10;stroke-width:6px;}.cls-4{stroke:#f7563c;}.cls-5{fill:url(#linear-gradient);}</style><linearGradient gradientTransform="translate(51.07 19.07) rotate(90)" gradientUnits="userSpaceOnUse" id="linear-gradient" x1="22.27" x2="33.6" y1="13.32" y2="27.31"><stop offset="0.02" stop-color="#f7563c"/><stop offset="1" stop-color="#d43217"/></linearGradient></defs><title/><circle class="cls-1" cx="32" cy="46" r="12"/><line class="cls-2" x1="32" x2="32" y1="13" y2="46"/><line class="cls-3" x1="32" x2="32" y1="13" y2="37"/><line class="cls-4" x1="32" x2="32" y1="19" y2="46"/><circle class="cls-5" cx="32" cy="46" r="9" transform="translate(-22.49 59.06) rotate(-68.66)"/></svg>
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="573.699px" height="573.699px" viewBox="0 0 573.699 573.699" style="enable-background:new 0 0 573.699 573.699;"
+	 xml:space="preserve">
+<g>
+	<g>
+		<path d="M344.25,401.699V57.4c0-32.5-24.9-57.4-57.4-57.4c-32.5,0-57.4,26.8-57.4,57.4v344.2c-23,17.201-38.2,45.9-38.2,76.5
+			c0,53.5,42.1,95.6,95.6,95.6c53.5,0,95.599-42.1,95.599-95.6C382.449,447.5,367.15,418.9,344.25,401.699z M286.85,554.699
+			c-42.1,0-76.5-34.398-76.5-76.5c0-28.699,15.3-53.5,38.2-66.898V57.4c0-21,17.2-38.2,38.2-38.2s38.199,17.2,38.199,38.2v353.799
+			c23,13.4,38.201,38.201,38.201,66.9C363.35,520.199,328.949,554.699,286.85,554.699z"/>
+		<path d="M305.949,424.6c0-1.9,0-1.9,0-3.799v-95.602c0-11.5-7.6-19.1-19.099-19.1c-11.5,0-19.1,7.6-19.1,19.1v95.602
+			c0,1.898,0,1.898,0,3.799c-23,7.701-38.2,28.701-38.2,53.5c0,32.5,24.9,57.4,57.4,57.4c32.499,0,57.399-24.9,57.399-57.4
+			C344.25,453.301,328.949,432.301,305.949,424.6z"/>
+	</g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+<g>
+</g>
+</svg>
