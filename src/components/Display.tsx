@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { keyframes } from "styled-components";
-import SearchComponent from "../features/search/SearchComponent.tsx";
+import SearchComponent from "./SearchComponent.tsx";
 import Spinner from "./UI/Spinner.tsx";
 
 const Error404 = lazy(() => import("./Error404.tsx"));

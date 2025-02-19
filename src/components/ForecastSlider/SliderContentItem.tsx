@@ -1,45 +1,40 @@
 import React from "react";
 import styled from "styled-components";
-import { getWeatherImgFromId } from "../../utils/getWeatherImg.ts";
-import { List } from "../../types/WeatherResponse.ts";
+import { HourlyForecast } from "../../types/WeatherResponse.ts";
 import showMore from "../../assets/img/showMore.svg";
 
-const SliderContentItem = ({ date, index, isActive, onClickSelect }: SliderContentItemProps) => {
-    const forecastHour = date.dt_txt.split(' ')[1];
-    const isDayTime = forecastHour >= '06:00:00' && forecastHour < '21:00:00';
+const SliderContentItem = ({ date, img, description }: SliderContentItemProps) => {
 
     return (
         <ItemContainer
-            $isActive={isActive}
-            onClick={() => onClickSelect(index)}
             title="показать подробности"
         >
-            <Time>{forecastHour.slice(0, 5)}</Time>
-            <ImgTypeImg src={getWeatherImgFromId(date.weather[0].id, isDayTime)} alt="Тип погоды" />
-            <Temp>{Math.trunc(date.main.temp) + "°"}</Temp>
-            <Description>{date.weather[0].description}</Description>
+            <Time>{date.time.split(' ')[1]}</Time>
+            <ImgTypeImg src={img} alt="Тип погоды" />
+            <Temp>{Math.trunc(date.temp_c) + "°"}</Temp>
+            <Description>{description}</Description>
             <ShowMore src={showMore} alt="показать подробности" />
         </ItemContainer>
     );
 };
 
-export const MemoizedSliderContentItem = React.memo(SliderContentItem); // ререндер компонента только при изменении пропсов
+export default SliderContentItem;
 
 interface SliderContentItemProps {
-	date: List;
-	index: number;
-    isActive: boolean;
-	onClickSelect: (index: number) => void;
+	date: HourlyForecast;
+    img: string;
+    description: string;
 };
 
-const ItemContainer = styled.div<{ $isActive: boolean }>`
+const ItemContainer = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
     min-width: 8.1rem;
-    height: 11rem;
-    border: 0.1rem solid ${({ $isActive }) => $isActive ? 'green' : 'gray'};
+    min-height: 11rem;
+    height: 100%;
+    border: 0.1rem solid gray;
     border-radius: 1rem;
     padding: 0.5rem;
     cursor: pointer;
@@ -72,6 +67,7 @@ const ItemContainer = styled.div<{ $isActive: boolean }>`
         width: 100%;
         height: auto;
         padding: 1rem;
+        min-height: 9rem;
     }
 `;
 
@@ -93,7 +89,8 @@ const Temp = styled.p`
 `;
 
 const Description = styled.p`
-    width: 5.5rem;
+    width: 6rem;
+    word-break: break-word;
     text-align: center;
     font-size: 0.9rem;
 `;

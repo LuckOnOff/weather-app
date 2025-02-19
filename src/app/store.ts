@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import searchReducer from "../features/search/searchSlice.ts";
 import weatherReducer from "../features/weather/weatherSlice.ts";
+import placeReducer from "../features/place/placeSlice.ts";
 
 export const store = configureStore({
     reducer: {
-        search: searchReducer,
         weather: weatherReducer,
+        place: placeReducer
     },
 });
 

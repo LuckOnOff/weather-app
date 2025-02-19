@@ -1,32 +1,33 @@
-import React, { useCallback } from "react";
-import { MemoizedSliderContentItem } from "./SliderContentItem.tsx";
+import React from "react";
+import SliderContentItem from "./SliderContentItem.tsx";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
-import { useAppDispatch } from "../../hooks/useAppDispatch.ts";
-import { setActiveIndex } from "../../features/weather/weatherSlice.ts";
+import { isDayTime } from "../../utils/isDayTime.ts";
+import { getWeatherImgWithDescript } from "../../utils/getWeatherImgWithDescript.ts";
 
 const SliderContent = () => {
-    const dispatch = useAppDispatch();
-    
-    const selectedForecast = useAppSelector((state) => state.weather.selectedForecast);
-    const activeIndex = useAppSelector((state) => state.weather.activeIndex);
+    const days = useAppSelector((state) => state.weather.data?.forecast.forecastday);
+    const selectedDay = useAppSelector((state) => state.weather.selectedDay);
 
-    const handleSelect = useCallback((index: number) => {
-        dispatch(setActiveIndex(index));
+    if(!days) return 'ошибка загрузки данных';
 
-        window.scrollTo({ top: 0, behavior: "smooth" });
-    }, [dispatch]);
+    const forecastHours = selectedDay ? days[selectedDay].hour : days[0].hour;
 
     return (
         <>
-            {selectedForecast?.map((date, index) => (
-                <MemoizedSliderContentItem
-                    key={date.dt}
-                    date={date}
-                    isActive={activeIndex === index}
-                    index={index}
-                    onClickSelect={handleSelect}
-                />
-            ))}
+            {forecastHours.map((date) => {
+                const isDay = isDayTime(date.time.split(' ')[1]);
+                const { img, description } = getWeatherImgWithDescript(date.condition.code, isDay);
+
+                return (
+                    <SliderContentItem
+                        key={date.time_epoch}
+                        date={date}
+                        img={img}
+                        description={description}
+
+                    />
+                )
+            })}
         </>
     );
 };

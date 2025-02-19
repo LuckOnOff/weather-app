@@ -18,6 +18,7 @@ const Container = styled.section`
     align-items: center;
     width: 100%;
     min-height: 100%;
+    margin: 0.7rem 0.7rem 0.7rem 0;
 `;
 
 const spin = keyframes`

@@ -1,21 +1,32 @@
 import React, { RefObject, useCallback, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
-import { SelectedForecastLength } from "../../types/SelectedForecastLength.ts";
 
 const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
+    const localTime = useAppSelector((state) => state.weather.localTime);
+    const currentHour = Number(localTime?.startsWith('0') ? localTime?.slice(1, 2) : localTime?.slice(0, 2));
+
+    const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const width = rootFontSize * 10.1; // размер в rem
+    const newItemWidth = width * 3;
+
     const [scrollState, setScrollState] = useState({
-        scrollPosition: 0,
+        scrollPosition: currentHour * width,
         itemWidth: 0,
         maxScroll: 0,
     });
 
+    useEffect(() => {
+        if(sliderSection.current) {
+            sliderSection.current.scrollTo({
+                left: currentHour * width,
+                behavior: "smooth"
+            })
+        }
+    }, [currentHour, sliderSection, width]);
+
     // функция для вычисления itemWidth в пикселях
     const updateDimensions = useCallback(() => {
-        const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-        const width = rootFontSize * 10; // размер в rem
-        const newItemWidth = width * 3;
-    
         setScrollState((prevState) => ({
             ...prevState,
             itemWidth: newItemWidth,
@@ -30,7 +41,7 @@ const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
                 maxScroll,
             }));
         }
-    }, [sliderSection]);
+    }, [sliderSection, newItemWidth]);
 
     // обновление размеров и максимальный скролл
     useEffect(() => {
@@ -68,22 +79,17 @@ const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
         });
     };
 
-    const selectedForecast = useAppSelector((state) => state.weather.selectedForecast);
-    const selectedForecastLength = selectedForecast?.length;
-
     const isLastSlide = scrollState.scrollPosition >= scrollState.maxScroll;
 
     return (
         <>
             <LeftContainerArrow
-                $selectedForecastLength={selectedForecastLength}
                 $scrollPosition={scrollState.scrollPosition} 
                 onClick={() => handleScroll("left")}
             >
                 <ArrowItem>&lsaquo;</ArrowItem>
             </LeftContainerArrow>
             <RightContainerArrow
-                $selectedForecastLength={selectedForecastLength}
                 $isLastSlide={isLastSlide} 
                 onClick={() => handleScroll("right")}
             >
@@ -99,11 +105,11 @@ interface SliderArrowsProps {
     sliderSection: RefObject<HTMLDivElement | null>;
 };
 
-interface ScrollPosition extends SelectedForecastLength {
+interface ScrollPosition {
     $scrollPosition: number;
 };
 
-interface IsLastSlide extends SelectedForecastLength {
+interface IsLastSlide {
     $isLastSlide: boolean;
 };
 
@@ -112,7 +118,7 @@ const BaseContainerArrow = css`
     justify-content: center;
     align-items: center;
     position: absolute;
-    top: 31.5rem;
+    top: 0.5rem;
     height: 10rem;
     width: 1.2rem;
     background: #e4e3e9;
@@ -127,26 +133,18 @@ const BaseContainerArrow = css`
 
 const LeftContainerArrow = styled.div<ScrollPosition>`
     ${BaseContainerArrow};
-    left: 0;
+    left: -0.9rem;
 
     ${({ $scrollPosition }) => $scrollPosition === 0 && `
-        display: none;
-    `}
-
-    ${({ $selectedForecastLength }) => ($selectedForecastLength || 0) <= 3 && `
         display: none;
     `}
 `;
 
 const RightContainerArrow = styled.div<IsLastSlide>`
     ${BaseContainerArrow};
-    right: 0;
+    right: -0.7rem;
 
     ${({ $isLastSlide }) => $isLastSlide && `
-        display: none;
-    `}
-
-    ${({ $selectedForecastLength }) => ($selectedForecastLength || 0) <= 3 && `
         display: none;
     `}
 `;

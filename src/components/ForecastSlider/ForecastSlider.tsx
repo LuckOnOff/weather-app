@@ -1,22 +1,15 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import SliderContent from "./SliderContent.tsx";
-import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import SliderArrows from "./SliderArrows.tsx";
-import { SelectedForecastLength } from "../../types/SelectedForecastLength.ts";
 
 const WeatherForecastSlider = () => {
     const sliderSection = useRef<HTMLDivElement | null>(null);
-    const selectedForecast = useAppSelector((state) => state.weather.selectedForecast);
-
-    if (!selectedForecast) return null;
-
-    const selectedForecastLength = selectedForecast.length;
 
     return (
         <Container>
             <SliderArrows sliderSection={sliderSection} />
-            <SliderContainer ref={sliderSection} $selectedForecastLength={selectedForecastLength}>
+            <SliderContainer ref={sliderSection}>
                 <SliderContent />
             </SliderContainer>
         </Container>
@@ -30,13 +23,14 @@ const Container = styled.section`
     margin-top: 2.5rem;
     margin-bottom: 1rem;
     width: 100%;
+    position: relative;
 
     @media (max-width: 480px) {
         margin-bottom: 0;
     }
 `;
 
-const SliderContainer = styled.section<SelectedForecastLength>`
+const SliderContainer = styled.section`
     display: flex;
     overflow-x: hidden;
     scrollbar-width: none;
@@ -49,6 +43,4 @@ const SliderContainer = styled.section<SelectedForecastLength>`
         gap: 1.5rem;
         overflow-x: visible;
     }
-
-    ${({ $selectedForecastLength }) => ($selectedForecastLength || 0) <= 3 && `justify-content: center;`}
 `;
