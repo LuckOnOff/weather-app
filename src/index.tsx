@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom/client';
 import App from './App.tsx';
 import { Provider } from 'react-redux';
 import { store } from './app/store.ts';
+import reportWebVitals from './reportWebVitals.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>
@@ -14,3 +16,5 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
+
+reportWebVitals(console.log);
