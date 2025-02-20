@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "./static/js/main.bfb10232.js",
+    "main.js": "./static/js/main.9c033a7a.js",
     "static/js/340.a5e53e64.chunk.js": "./static/js/340.a5e53e64.chunk.js",
-    "static/js/870.1003d6b7.chunk.js": "./static/js/870.1003d6b7.chunk.js",
+    "static/js/729.e4996c4c.chunk.js": "./static/js/729.e4996c4c.chunk.js",
     "static/media/sun.svg": "./static/media/sun.2f1b114e6806eb90c254319a5e36bcb4.svg",
     "static/media/thunderstorm.svg": "./static/media/thunderstorm.6f61b857d4cba052a96008ef9fd4c72e.svg",
     "static/media/error404.svg": "./static/media/error404.f24ec84fbdc151be41da03c68e2a6f3d.svg",
@@ -19,11 +19,11 @@
     "static/media/gps.svg": "./static/media/gps.6c8492eb52d5bc848c24a14ad834bfcc.svg",
     "static/media/windDirection.svg": "./static/media/windDirection.7b7df0de8a2b1d4b36c92a5fa59b42a0.svg",
     "static/media/showMore.svg": "./static/media/showMore.fb27ca055354c6d1770179c7f5de597d.svg",
-    "main.bfb10232.js.map": "./static/js/main.bfb10232.js.map",
+    "main.9c033a7a.js.map": "./static/js/main.9c033a7a.js.map",
     "340.a5e53e64.chunk.js.map": "./static/js/340.a5e53e64.chunk.js.map",
-    "870.1003d6b7.chunk.js.map": "./static/js/870.1003d6b7.chunk.js.map"
+    "729.e4996c4c.chunk.js.map": "./static/js/729.e4996c4c.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.bfb10232.js"
+    "static/js/main.9c033a7a.js"
   ]
 }
