@@ -7,6 +7,7 @@ import { fetchWeather } from "../features/weather/weatherSlice.ts";
 import DaysList from "./DaysList.tsx";
 import Spinner from "./UI/Spinner.tsx";
 import gpsImg from "../assets/img/gps.svg";
+import { getTranslatePlaceType } from "../utils/getTranslatePlaceType.ts";
 
 const SearchComponent = () => {
     const dispatch = useAppDispatch();
@@ -26,7 +27,7 @@ const SearchComponent = () => {
 
     // debounce API-запрос
     useEffect(() => {
-        if (!searchQuery) return;
+        if (searchQuery.trim().length === 0) return;
 
         if (debounceRef.current) clearTimeout(debounceRef.current);
         
@@ -70,6 +71,14 @@ const SearchComponent = () => {
         setSearchQuery('');
     };
 
+    const handleChangeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const newValue = e.target.value;
+
+        if (!/[0-9]/.test(newValue)) {
+            setSearchQuery(newValue);
+        };
+    };
+
     return (
         <SearchWrapper>
             <SearchForm onSubmit={(e) => e.preventDefault()}>
@@ -80,7 +89,7 @@ const SearchComponent = () => {
                             type="text"
                             placeholder="Введите название локации"
                             value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onChange={handleChangeInputValue}
                             onFocus={() => setShowDropdown(true)}
                         />
                     </InputContainer>
@@ -93,11 +102,15 @@ const SearchComponent = () => {
                         <Spinner />
                     ) : (
                         places?.length ? (
-                            places.map((place, index) => (
-                                <DropdownItem key={index} onClick={() => handleSelectPlace(index)}>
-                                    {place.display_name + ', ' + place.type}
-                                </DropdownItem>
-                            ))
+                            places.map((place, index) => {
+                                const translatePlaceType = getTranslatePlaceType(place.type);
+
+                                return (
+                                    <DropdownItem key={index} onClick={() => handleSelectPlace(index)}>
+                                        {place.display_name + ', ' + translatePlaceType}
+                                    </DropdownItem>
+                                )
+                            })
                         ) : (
                             <DropdownItem>Ничего не найдено</DropdownItem>
                         )
@@ -165,7 +178,7 @@ const Dropdown = styled.div<{ $successfully: boolean | null }>`
     background: white;
     border: 0.1rem solid #ddd;
     border-radius: 0.3rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.1);
     z-index: 1;
     overflow: hidden;
     max-height: 13rem;
@@ -174,8 +187,8 @@ const Dropdown = styled.div<{ $successfully: boolean | null }>`
 	transition: transform 0.3s ease-in-out;
 
     &::-webkit-scrollbar {
-        width: 12px;
-        height: 12px;
+        width: 0.7rem;
+        height: 0.7rem;
     }
 
     &::-webkit-scrollbar-track {
@@ -194,6 +207,9 @@ const DropdownItem = styled.div`
     padding: 0.6rem;
     cursor: pointer;
     transition: background 0.3s;
+    margin: 0.9rem;
+    border: 0.09rem solid #62aeff;
+    border-radius: 0.5rem;
 
     &:hover {
         background: #f2f2f2;

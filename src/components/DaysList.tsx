@@ -4,6 +4,12 @@ import { useAppSelector } from "../hooks/useAppSelector.ts";
 import { useAppDispatch } from "../hooks/useAppDispatch.ts";
 import { setSelectedDay } from "../features/weather/weatherSlice.ts";
 
+const dataTypeObj = {
+	0: 'сегодня',
+	1: 'завтра',
+	2: 'послезавтра'
+};
+
 const DaysList = () => {
 	const buttonRef = useRef<HTMLButtonElement | null>(null);
 
@@ -26,12 +32,6 @@ const DaysList = () => {
 		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, []);
 
-	const dataTypeObj = {
-		0: 'сегодня',
-		1: 'завтра',
-		2: 'послезавтра'
-	};
-	
 	const dateType = selectedDay !== null ? dataTypeObj[selectedDay] : '';
 	const currentDay = selectedDay === null ? 'выбрать день' : dateType;
 
@@ -93,12 +93,12 @@ const fadeIn = keyframes`
 
 const DropdownContainer = styled.div`
 	position: absolute;
-	top: 3rem;
+	top: 2.5rem;
 	left: 0;
     background: white;
     border: 1px solid #ddd;
     border-radius: 0.3rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.1);
 	width: 10rem;
 	z-index: 1;
 	animation: ${fadeIn} 0.5s;
