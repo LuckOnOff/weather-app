@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import CurrentTime from "../CurrentTime.tsx";
 import WeatherSummary from "./WeatherSummary.tsx";
-import WeatherDetails from "./WeatherDetails.tsx";
+import CurrentWeatherDetails from "./CurrentWeatherDetails.tsx";
 import { getWeatherImgWithDescript } from "../../utils/getWeatherImgWithDescript.ts";
 import { isDayTime } from "../../utils/isDayTime.ts";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
@@ -28,7 +28,7 @@ const CurrentWeather = () => {
                     temp={temp}
                     description={description}
                 />
-                <WeatherDetails />
+                <CurrentWeatherDetails />
             </BottomContainer>
 		</>
 	)

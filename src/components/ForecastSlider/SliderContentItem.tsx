@@ -72,7 +72,6 @@ const ItemContainer = styled.div`
 `;
 
 const Time = styled.p`
-    font-size: 1rem;
 `;
 
 const ImgTypeImg = styled.img`
@@ -80,7 +79,6 @@ const ImgTypeImg = styled.img`
 `;
 
 const Temp = styled.p`
-    font-size: 1rem;
     font-weight: 600;
 
     @media (max-width: 480px) {
@@ -92,7 +90,6 @@ const Description = styled.p`
     width: 6rem;
     word-break: break-word;
     text-align: center;
-    font-size: 0.9rem;
 `;
 
 const ShowMore = styled.img`

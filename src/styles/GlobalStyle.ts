@@ -6,6 +6,11 @@ export const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+
+    @media (max-width: 580px) {
+        font-size: 1.09rem;
+    }
 }
 
 a {
@@ -20,6 +25,7 @@ button {
     cursor: pointer;
     font-family: inherit;
     border: none;
+    font-size: inherit;
 }
 
 #root {

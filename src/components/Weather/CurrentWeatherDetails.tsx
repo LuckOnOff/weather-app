@@ -48,7 +48,7 @@ const WeatherDetails = () => {
                             <ArrowWindDirection src={arrowWindDirection} alt="Направление ветра" $transformDeg={transformDeg} />
                         </ItemSpan>
                     </WindSpeedContainer>
-                    <GustWindSpeedP>порывы до {gustWind}</GustWindSpeedP>
+                    <p>порывы до {gustWind}</p>
                 </DetailsListItem>
                 {repeatDetailsElements.map((item) => (
                     <DetailsListItem key={item.id} title={item.title}>
@@ -68,7 +68,7 @@ const Details = styled.div`
     height: 100%;
     margin-top: 1rem;
 
-    @media (max-width: 440px) {
+    @media (max-width: 480px) {
         width: 100%;
         justify-content: center;
     }
@@ -83,9 +83,9 @@ const DetailsList = styled.ul`
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(3, 1fr);
-        gap: 0.4rem;
-        justify-items: center;
+        gap: 1.5rem;
         align-items: center;
+        justify-items: start;
     }
 `;
 
@@ -96,7 +96,6 @@ const DetailsListItem = styled.li`
 
     &:nth-last-child(1) {
         margin-bottom: 0rem;
-        grid-column: span 2;
     }
 
     &:nth-child(2) {
@@ -109,6 +108,30 @@ const DetailsListItem = styled.li`
 
         &:nth-child(1) {
             grid-column: span 2;
+            width: 100%;
+            justify-content: center;
+        }
+
+        &:nth-last-child(1) {
+            grid-column: span 2;
+            width: 100%;
+            justify-content: center;
+        }
+
+        &:nth-child(2) {
+            margin-right: -1rem;
+        }
+
+        &:nth-child(3) {
+            margin-left: 2rem;
+        }
+
+        &:nth-child(4) {
+            margin-right: -1rem;
+        }
+
+        &:nth-child(5) {
+            margin-left: 2rem;
         }
     }
 `;
@@ -121,23 +144,17 @@ const ItemImg = styled.img`
 const TempFeelsLikeSpan = styled.span`
     margin-left: 0.3rem;
     font-weight: 600;
-    font-size: 1rem;
 `;
 
 const ItemSpan = styled.span`
     display: flex;
     align-items: center;
-    font-size: 1rem;
 `;
 
 const WindSpeedContainer = styled.div`
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-`;
-
-const GustWindSpeedP = styled.p`
-    font-size: 1rem;
 `;
 
 const ArrowWindDirection = styled.img<{ $transformDeg: number }>`

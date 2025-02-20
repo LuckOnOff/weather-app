@@ -103,10 +103,10 @@ const DetailsList = styled.ul`
     @media (max-width: 480px) {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(3, 1fr);
-        gap: 0.4rem;
-        justify-items: center;
-        align-items: center;
+        grid-template-rows: repeat(2, 1fr);
+        gap: 1.5rem 3rem;
+		align-items: start;
+		margin-top: 2rem;
     }
 `;
 
@@ -119,12 +119,8 @@ const DetailsItem = styled.li`
         margin-bottom: 0rem;
     }
 
-    @media (max-width: 440px) {
+    @media (max-width: 480px) {
         margin-bottom: 0;
-
-        &:nth-child(1) {
-            grid-column: span 2;
-        }
     }
 `;
 
@@ -145,5 +141,4 @@ const DetailIcon = styled.img`
 
 const DetailValue = styled.span`
 	display: block;
-	font-size: 1rem;
 `;

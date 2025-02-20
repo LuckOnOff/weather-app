@@ -26,22 +26,34 @@ const DaysList = () => {
 		return () => document.removeEventListener("mousedown", handleClickOutside);
 	}, []);
 
-	const currentDay = selectedDay === null ? 'выбрать день' : days[selectedDay]?.date.split(' ')[0];
+	const dataTypeObj = {
+		0: 'сегодня',
+		1: 'завтра',
+		2: 'послезавтра'
+	};
+	
+	const dateType = selectedDay !== null ? dataTypeObj[selectedDay] : '';
+	const currentDay = selectedDay === null ? 'выбрать день' : dateType;
 
 	return (
 		<Container>
 				<Placeholder ref={buttonRef} onClick={() => setShowDropdown(!showDropdown)}>{currentDay}</Placeholder>
 				{showDropdown && 
 					<DropdownContainer>
-						{days?.map((item, index) => (
-							<Day 
-								key={index}
-								onClick={() => dispatch(setSelectedDay(index))}
-									
-							>
-								{item.date.split(' ')[0]}
-							</Day>
-						))}
+						{days?.map((item, index) => {
+							const dateArr = item.date.split('-');
+							const formattedDate = dateArr[2] + '.' + dateArr[1];
+
+							return (
+								<Day 
+									key={index}
+									onClick={() => dispatch(setSelectedDay(index))}
+										
+								>
+									{formattedDate}
+								</Day>
+							)
+						})}
 					</DropdownContainer>
 				}
 		</Container>
@@ -65,8 +77,6 @@ const Placeholder = styled.button`
 	min-width: 7rem;
 	width: 100%;
 	height: 100%;
-	cursor: poiner;
-	font-size: 1rem;
 `;
 
 const fadeIn = keyframes`
@@ -89,7 +99,7 @@ const DropdownContainer = styled.div`
     border: 1px solid #ddd;
     border-radius: 0.3rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-	width: 100%;
+	width: 10rem;
 	z-index: 1;
 	animation: ${fadeIn} 0.5s;
 	transition: 0.3s ease-in-out;
@@ -101,6 +111,6 @@ const Day = styled.time`
 	align-items: center;
 	border-bottom: 0.1rem solid gray;
 	min-height: 3.5rem;
-	height: 100%;
+	height: 4.5rem;
 	cursor: pointer;
 `;

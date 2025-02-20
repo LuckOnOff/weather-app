@@ -62,7 +62,7 @@ const weatherMapping: Record<number, number> = {
 
 const weatherDescription: Record<number, string> = {
     1: 'Гроза',
-    2: 'Дождь',
+    2: 'Морось',
     3: 'Дождь',
     4: 'Снег',
     5: 'Туман',

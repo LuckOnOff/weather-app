@@ -3,10 +3,10 @@ import styled, { keyframes } from "styled-components";
 import { useAppDispatch } from "../hooks/useAppDispatch.ts";
 import { useAppSelector } from "../hooks/useAppSelector.ts";
 import { setClearPlaces, fetchPlaces, setPickedPlace } from "../features/place/placeSlice.ts";
-import gpsImg from "../assets/img/gps.svg";
 import { fetchWeather } from "../features/weather/weatherSlice.ts";
 import DaysList from "./DaysList.tsx";
 import Spinner from "./UI/Spinner.tsx";
+import gpsImg from "../assets/img/gps.svg";
 
 const SearchComponent = () => {
     const dispatch = useAppDispatch();
@@ -134,7 +134,6 @@ const SearchInput = styled.input`
     width: 15rem;
     padding: 0.6rem;
     border-radius: 0.2rem;
-    font-size: 1.1rem;
     outline: none;
     border: none;
     margin: 0 0.3rem;
@@ -195,6 +194,7 @@ const DropdownItem = styled.div`
     padding: 0.6rem;
     cursor: pointer;
     transition: background 0.3s;
+
     &:hover {
         background: #f2f2f2;
     }
