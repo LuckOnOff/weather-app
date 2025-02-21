@@ -124,7 +124,7 @@
     margin-top: 1.2rem;
     letter-spacing: 0.1rem;
     word-break: break-word;
-`,z=()=>{const A=(0,D.G)((A=>A.weather.localTime));return(0,i.jsx)(j,{children:A})},j=C.Ay.time`
+`,j=()=>{const A=(0,D.G)((A=>A.weather.localTime));return(0,i.jsx)(z,{children:A})},z=C.Ay.time`
 	font-size: 1.5rem;
 	margin: 1.5rem 0 2rem;
 `,b=A=>{let{img:g,temp:B,description:w}=A;return(0,i.jsxs)(U,{children:[(0,i.jsx)(W,{src:g,alt:"\u041f\u043e\u0433\u043e\u0434\u0430 \u0441\u0435\u0439\u0447\u0430\u0441"}),(0,i.jsx)(O,{children:B}),(0,i.jsx)(k,{children:w})]})},U=C.Ay.div`
@@ -232,7 +232,7 @@
     width: 0.7rem;
     margin-left: 0.2rem;
     transform: rotate(${A=>{let{$transformDeg:g}=A;return g}}deg);
-`,wA=()=>{const A=(0,D.G)((A=>{var g;return null===(g=A.weather.data)||void 0===g?void 0:g.current})),g=(0,D.G)((A=>A.weather.localTime));if(!A)return(0,i.jsx)("div",{children:"\u041e\u0448\u0438\u0431\u043a\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438 \u0434\u0430\u043d\u043d\u044b\u0445"});const B=Math.trunc(A.temp_c)+"\xb0",w=A.condition.code,C=I(g||""),{img:e,description:Q}=d(w,C);return(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(z,{}),(0,i.jsxs)(CA,{children:[(0,i.jsx)(b,{img:e,temp:B,description:Q}),(0,i.jsx)(N,{})]})]})},CA=C.Ay.div`
+`,wA=()=>{const A=(0,D.G)((A=>{var g;return null===(g=A.weather.data)||void 0===g?void 0:g.current})),g=(0,D.G)((A=>A.weather.localTime));if(!A)return(0,i.jsx)("div",{children:"\u041e\u0448\u0438\u0431\u043a\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438 \u0434\u0430\u043d\u043d\u044b\u0445"});const B=Math.trunc(A.temp_c)+"\xb0",w=A.condition.code,C=I(g||""),{img:e,description:Q}=d(w,C);return(0,i.jsxs)(i.Fragment,{children:[(0,i.jsx)(j,{}),(0,i.jsxs)(CA,{children:[(0,i.jsx)(b,{img:e,temp:B,description:Q}),(0,i.jsx)(N,{})]})]})},CA=C.Ay.div`
     display: flex;
     justify-content: flex-start;
     width: 100%;
@@ -255,14 +255,16 @@
 	display: flex;
     flex-direction: column;
     height: 100%;
+	max-width: 22rem;
 
     @media (max-width: 480px) {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        gap: 1.5rem 3rem;
+        gap: 2rem 3rem;
 		align-items: start;
 		margin-top: 2rem;
+		justify-items: center;
     }
 `,tA=C.Ay.li`
 	display: flex;
@@ -275,6 +277,10 @@
 
     @media (max-width: 480px) {
         margin-bottom: 0;
+
+		&:nth-last-child(1) {
+			margin-left: -40%;
+		}
     }
 `,rA=C.Ay.div`
 	display: flex;
@@ -325,4 +331,4 @@
         justify-content: center;
     }
 `}}]);
-//# sourceMappingURL=729.e4996c4c.chunk.js.map
+//# sourceMappingURL=729.c5b2f4d7.chunk.js.map
