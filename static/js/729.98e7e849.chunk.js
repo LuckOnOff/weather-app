@@ -255,7 +255,7 @@
 	display: flex;
     flex-direction: column;
     height: 100%;
-	margin-left: 2rem;
+	margin-left: 2.5rem;
 
     @media (max-width: 480px) {
         display: grid;
@@ -328,4 +328,4 @@
         justify-content: center;
     }
 `}}]);
-//# sourceMappingURL=729.b4a0c2fc.chunk.js.map
+//# sourceMappingURL=729.98e7e849.chunk.js.map
