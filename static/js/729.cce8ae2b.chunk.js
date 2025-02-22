@@ -255,7 +255,7 @@
 	display: flex;
     flex-direction: column;
     height: 100%;
-	max-width: 22rem;
+	margin-left: 2rem;
 
     @media (max-width: 480px) {
         display: grid;
@@ -270,6 +270,7 @@
 	display: flex;
     align-items: center;
     margin-bottom: 1.5rem;
+	width: 9.1rem;
 
     &:nth-last-child(1) {
         margin-bottom: 0rem;
@@ -277,10 +278,6 @@
 
     @media (max-width: 480px) {
         margin-bottom: 0;
-
-		&:nth-last-child(1) {
-			margin-left: -40%;
-		}
     }
 `,rA=C.Ay.div`
 	display: flex;
@@ -331,4 +328,4 @@
         justify-content: center;
     }
 `}}]);
-//# sourceMappingURL=729.c5b2f4d7.chunk.js.map
+//# sourceMappingURL=729.cce8ae2b.chunk.js.map
