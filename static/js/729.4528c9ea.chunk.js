@@ -261,7 +261,7 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        gap: 2rem 3rem;
+        gap: 2rem 1rem;
 		align-items: start;
 		margin-top: 2rem;
 		justify-items: center;
@@ -270,7 +270,7 @@
 	display: flex;
     align-items: center;
     margin-bottom: 1.5rem;
-	width: 9.1rem;
+	width: 9.5rem;
 
     &:nth-last-child(1) {
         margin-bottom: 0rem;
@@ -328,4 +328,4 @@
         justify-content: center;
     }
 `}}]);
-//# sourceMappingURL=729.cce8ae2b.chunk.js.map
+//# sourceMappingURL=729.4528c9ea.chunk.js.map
