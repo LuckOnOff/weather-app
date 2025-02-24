@@ -4,13 +4,22 @@ import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import { isDayTime } from "../../utils/isDayTime.ts";
 import { getWeatherImgWithDescript } from "../../utils/getWeatherImgWithDescript.ts";
 
-const SliderContent = () => {
+const SliderContent = ({ 
+    isMobile,
+    showAllHours,
+    currentHour,
+    selectedDay,
+    isDaySelected }: SliderContentProps
+) => {
     const days = useAppSelector((state) => state.weather.data?.forecast.forecastday);
-    const selectedDay = useAppSelector((state) => state.weather.selectedDay);
 
     if(!days) return 'ошибка загрузки данных';
 
-    const forecastHours = selectedDay ? days[selectedDay].hour : days[0].hour;
+    const dayHours = (!isDaySelected && selectedDay) ? days[selectedDay].hour : days[0]?.hour || [];
+
+    const forecastHours = isDaySelected && !showAllHours
+        ? (isMobile ? dayHours.slice(currentHour) : dayHours)
+        : dayHours;
 
     return (
         <>
@@ -32,3 +41,11 @@ const SliderContent = () => {
 };
 
 export default SliderContent;
+
+interface SliderContentProps {
+    isMobile: boolean;
+    showAllHours: boolean;
+    currentHour: number;
+    selectedDay: number | null;
+    isDaySelected: boolean;
+};

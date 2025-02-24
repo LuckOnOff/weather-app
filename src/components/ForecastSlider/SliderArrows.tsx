@@ -1,35 +1,30 @@
 import React, { RefObject, useCallback, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
-import { useAppSelector } from "../../hooks/useAppSelector.ts";
 
-const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
-    const localTime = useAppSelector((state) => state.weather.localTime);
-    const currentHour = Number(localTime?.startsWith('0') ? localTime?.slice(1, 2) : localTime?.slice(0, 2));
-
+const SliderArrows = ({ sliderSection, currentHour }: SliderArrowsProps) => {
     const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
     const width = rootFontSize * 10.095; // размер в rem
-    const newItemWidth = width * 3;
 
     const [scrollParams, setScrollParams] = useState({
         scrollPosition: currentHour * width,
-        itemWidth: 0,
+        viewZoneWidth: width * 3,
         maxScroll: 0,
     });
 
     useEffect(() => {
-        if(sliderSection.current) {
-            sliderSection.current.scrollTo({
-                left: currentHour * width,
-                behavior: "smooth"
-            })
+        if (sliderSection.current && sliderSection.current.scrollLeft !== currentHour * width) {
+            sliderSection.current.scrollTo({ 
+                left: currentHour * width, 
+                behavior: "smooth" 
+            });
         }
-    }, [currentHour, sliderSection, width]);
+    }, [currentHour, sliderSection, width]);    
 
     // функция для вычисления itemWidth в пикселях
     const updateDimensions = useCallback(() => {
         setScrollParams((prevState) => ({
             ...prevState,
-            itemWidth: newItemWidth,
+            viewZoneWidth: width * 3,
         }));
     
         // проверка на null и обновление maxScroll
@@ -41,7 +36,7 @@ const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
                 maxScroll,
             }));
         }
-    }, [sliderSection, newItemWidth]);
+    }, [sliderSection, width]);
 
     // обновление размеров и максимальный скролл
     useEffect(() => {
@@ -61,8 +56,8 @@ const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
     const handleScroll = (direction: "left" | "right"): void => {
         setScrollParams((prevState) => {
             const newPosition = direction === "left" ?
-                prevState.scrollPosition - prevState.itemWidth :
-                prevState.scrollPosition + prevState.itemWidth;
+                prevState.scrollPosition - prevState.viewZoneWidth :
+                prevState.scrollPosition + prevState.viewZoneWidth;
 
             // обновление позиции скролла и соблюдение границ
             if (sliderSection.current) {
@@ -103,6 +98,7 @@ export default SliderArrows;
 
 interface SliderArrowsProps {
     sliderSection: RefObject<HTMLDivElement | null>;
+    currentHour: number;
 };
 
 interface ScrollPosition {
