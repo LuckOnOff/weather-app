@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const WeatherSummary = ({ img, temp, description }: WeatherSummaryProps) => {
+const WeatherSummary = ({ img, temp, description, marginRight }: WeatherSummaryProps) => {
     
     return (
-        <StyledWeatherSummary>
-            <WeatherImg src={img} alt="Погода сейчас" />
+        <StyledWeatherSummary $marginRight={marginRight}>
+            <WeatherImg src={img} alt="погода сейчас" />
             <CurrentTemp>{temp}</CurrentTemp>
             <WeatherType>{description}</WeatherType>
         </StyledWeatherSummary>
@@ -18,14 +18,15 @@ interface WeatherSummaryProps {
     img: string;
     temp: string;
     description: string;
+    marginRight: boolean;
 };
 
-const StyledWeatherSummary = styled.div`
+const StyledWeatherSummary = styled.div<{ $marginRight: boolean }>`
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 100%;
-    margin-right: 2rem;
+    margin-right: ${({ $marginRight }) => $marginRight ? '2rem' : '0'};
 
     @media (max-width: 480px) {
         margin-right: 0;

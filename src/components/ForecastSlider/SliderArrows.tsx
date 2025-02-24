@@ -7,10 +7,10 @@ const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
     const currentHour = Number(localTime?.startsWith('0') ? localTime?.slice(1, 2) : localTime?.slice(0, 2));
 
     const rootFontSize = parseFloat(getComputedStyle(document.documentElement).fontSize);
-    const width = rootFontSize * 10.1; // размер в rem
+    const width = rootFontSize * 10.095; // размер в rem
     const newItemWidth = width * 3;
 
-    const [scrollState, setScrollState] = useState({
+    const [scrollParams, setScrollParams] = useState({
         scrollPosition: currentHour * width,
         itemWidth: 0,
         maxScroll: 0,
@@ -27,7 +27,7 @@ const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
 
     // функция для вычисления itemWidth в пикселях
     const updateDimensions = useCallback(() => {
-        setScrollState((prevState) => ({
+        setScrollParams((prevState) => ({
             ...prevState,
             itemWidth: newItemWidth,
         }));
@@ -36,7 +36,7 @@ const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
         if (sliderSection.current) {
             const maxScroll = sliderSection.current.scrollWidth - sliderSection.current.clientWidth;
 
-            setScrollState((prevState) => ({
+            setScrollParams((prevState) => ({
                 ...prevState,
                 maxScroll,
             }));
@@ -59,7 +59,7 @@ const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
     }, [updateDimensions]);
 
     const handleScroll = (direction: "left" | "right"): void => {
-        setScrollState((prevState) => {
+        setScrollParams((prevState) => {
             const newPosition = direction === "left" ?
                 prevState.scrollPosition - prevState.itemWidth :
                 prevState.scrollPosition + prevState.itemWidth;
@@ -79,12 +79,12 @@ const SliderArrows = ({ sliderSection }: SliderArrowsProps) => {
         });
     };
 
-    const isLastSlide = scrollState.scrollPosition >= scrollState.maxScroll;
+    const isLastSlide = scrollParams.scrollPosition >= scrollParams.maxScroll;
 
     return (
         <>
             <LeftContainerArrow
-                $scrollPosition={scrollState.scrollPosition} 
+                $scrollPosition={scrollParams.scrollPosition} 
                 onClick={() => handleScroll("left")}
             >
                 <ArrowItem>&lsaquo;</ArrowItem>

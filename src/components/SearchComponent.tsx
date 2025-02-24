@@ -181,7 +181,7 @@ const Dropdown = styled.div<{ $successfully: boolean | null }>`
     box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.1);
     z-index: 1;
     overflow: hidden;
-    max-height: 13rem;
+    max-height: 14rem;
     overflow-y: auto;
     animation: ${fadeIn} 0.5s;
 	transition: transform 0.3s ease-in-out;

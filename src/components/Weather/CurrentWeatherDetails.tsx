@@ -26,10 +26,10 @@ const WeatherDetails = () => {
     const cloudiness = currentForecast.cloud + "%";
 
     const repeatDetailsElements = [
-        { id: 0, title: "количество осадков", src: precipitationImg, alt: "Количество осадков", text: precipitation },
-        { id: 1, title: "давление на уровне земли", src: pressureImg, alt: "Давление", text: pressure },
-        { id: 2, title: "влажность", src: humidityImg, alt: "Влажность", text: humidity },
-        { id: 3, title: "облачность", src: cloudinessImg, alt: "Облачность", text: cloudiness },
+        { id: 0, title: "осадки", src: precipitationImg, alt: "осадки", text: precipitation },
+        { id: 1, title: "давление", src: pressureImg, alt: "давление", text: pressure },
+        { id: 2, title: "влажность", src: humidityImg, alt: "влажность", text: humidity },
+        { id: 3, title: "облачность", src: cloudinessImg, alt: "облачность", text: cloudiness },
     ];
 
     return (
@@ -42,10 +42,10 @@ const WeatherDetails = () => {
                 </DetailsListItem>
                 <DetailsListItem title="скорость ветра">
                     <WindSpeedContainer>
-                        <ItemImg src={windSpeedImg} alt="Скорость ветра" />
+                        <ItemImg src={windSpeedImg} alt="скорость ветра" />
                         <ItemSpan>
                             {windSpeed}
-                            <ArrowWindDirection src={arrowWindDirection} alt="Направление ветра" $transformDeg={transformDeg} />
+                            <ArrowWindDirection src={arrowWindDirection} alt="направление ветра" $transformDeg={transformDeg} />
                         </ItemSpan>
                     </WindSpeedContainer>
                     <p>порывы до {gustWind}</p>

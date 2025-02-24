@@ -24,13 +24,11 @@ const SliderContent = () => {
                         date={date}
                         img={img}
                         description={description}
-
                     />
                 )
             })}
         </>
     );
 };
-
 
 export default SliderContent;

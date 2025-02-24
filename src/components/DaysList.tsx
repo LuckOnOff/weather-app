@@ -33,7 +33,7 @@ const DaysList = () => {
 	}, []);
 
 	const dateType = selectedDay !== null ? dataTypeObj[selectedDay] : '';
-	const currentDay = selectedDay === null ? 'выбрать день' : dateType;
+	const currentDay = selectedDay === null ? 'сейчас' : dateType;
 
 	return (
 		<Container>
@@ -99,10 +99,14 @@ const DropdownContainer = styled.div`
     border: 1px solid #ddd;
     border-radius: 0.3rem;
     box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.1);
-	width: 10rem;
+	width: 100%;
 	z-index: 1;
 	animation: ${fadeIn} 0.5s;
 	transition: 0.3s ease-in-out;
+
+	@media (max-width: 385px) {
+		top: 3rem;
+	}
 `;
 
 const Day = styled.time`

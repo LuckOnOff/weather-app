@@ -1,11 +1,11 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import img404 from "../assets/img/error404.svg";
+import Keyframes from "styled-components/dist/models/Keyframes";
 import { useAppSelector } from "../hooks/useAppSelector.ts";
-import { Keyframes } from "styled-components/dist/types";
-import { FadeInProp } from "../types/FadeInProp.ts";
+import { fadeIn } from "../styles/animations/fadeIn.ts";
+import img404 from "../assets/img/error404.svg";
 
-const Error404 = ({ fadeIn }: FadeInProp) => {
+const Error404 = () => {
     const error = useAppSelector((state) => state.weather.error);
 
     return (

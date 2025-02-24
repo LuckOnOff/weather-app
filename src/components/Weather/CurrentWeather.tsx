@@ -27,6 +27,7 @@ const CurrentWeather = () => {
                     img={img}
                     temp={temp}
                     description={description}
+                    marginRight={true}
                 />
                 <CurrentWeatherDetails />
             </BottomContainer>

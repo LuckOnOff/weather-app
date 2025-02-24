@@ -57,7 +57,10 @@ const placeSlice = createSlice({
 		.addCase(fetchPlaces.fulfilled, (state, action: PayloadAction<ResponsePlace[]>) => {
 			state.loading = false;
 			state.places = action.payload;
-			console.log("Места: ",state.places);
+
+			if (process.env.NODE_ENV === 'development') {
+				console.log("Места: ", state.places);
+			}
 		})
 		.addCase(fetchPlaces.rejected, (state, action) => {
 			state.loading = false;

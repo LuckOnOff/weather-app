@@ -40,9 +40,10 @@ const SelectedDayWeather = () => {
 				img={img}
 				temp={temp}
 				description={description}
+				marginRight={false}
 			/>
 			<DetailsList>
-				<DetailsItem title="максимальная и минимальная температуры">
+				<DetailsItem title="температура">
 					<DetailIcon src={tempImg} alt="температура" />
 					<DoubleElementContainer>
 						<DetailValue>
@@ -59,8 +60,8 @@ const SelectedDayWeather = () => {
 						до {maxWindSpeed}
 					</DetailValue>
 				</DetailsItem>
-				<DetailsItem title="вероятность осадков">
-					<DetailIcon src={precipitationImg} alt="вероятность осадков" />
+				<DetailsItem title="осадки">
+					<DetailIcon src={precipitationImg} alt="осадки" />
 					<DoubleElementContainer>
 						<DetailValue>
 							{chanceRainOrSnow}
@@ -85,7 +86,7 @@ export default SelectedDayWeather;
 
 const Container = styled.section`
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     width: 100%;
     align-items: center;
 	margin-top: 2rem;
@@ -99,14 +100,17 @@ const DetailsList = styled.ul`
 	display: flex;
     flex-direction: column;
     height: 100%;
+	margin-left: 2rem;
 
     @media (max-width: 480px) {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(2, 1fr);
-        gap: 1.5rem 3rem;
+        gap: 2rem 0rem;
 		align-items: start;
 		margin-top: 2rem;
+		margin-left: 2.5rem;
+		justify-items: center;
     }
 `;
 
@@ -114,6 +118,7 @@ const DetailsItem = styled.li`
 	display: flex;
     align-items: center;
     margin-bottom: 1.5rem;
+	width: 9.5rem;
 
     &:nth-last-child(1) {
         margin-bottom: 0rem;

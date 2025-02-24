@@ -57,7 +57,10 @@ const weatherSlice = createSlice({
         state.successfully = true;
         state.data = action.payload;
         state.localTime = (state.data.location.localtime)?.split(' ')[1];
-        console.log('data: ', state.data);
+
+        if (process.env.NODE_ENV === 'development') {
+          console.log('data: ', state.data);
+        }
       })
       .addCase(fetchWeather.rejected, (state, action) => {
         state.loading = false;
