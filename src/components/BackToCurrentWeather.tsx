@@ -13,7 +13,7 @@ const BackToCurrentWeather = () => {
 	if(selectedDay !== null) {
 		return (
 			<Container title="вернуться к текущему прогнозу" onClick={() => dispath(setSelectedDay(null))}>
-				<ReturnArrow src={returnArrowImg} />
+				<ReturnArrow src={returnArrowImg} alt="вернуться к текущему прогнозу" />
 			</Container>
 		)
 	};

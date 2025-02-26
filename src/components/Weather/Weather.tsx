@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { Keyframes } from "styled-components/dist/types";
 import Spinner from "../UI/Spinner.tsx";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
@@ -8,7 +8,6 @@ import Title from "../Title.tsx";
 import CurrentWeather from "./CurrentWeather.tsx";
 import SelectedDayWeather from "./SelectedDayWeather.tsx";
 import BackToCurrentWeather from "../BackToCurrentWeather.tsx";
-import { fadeIn } from "../../styles/animations/fadeIn.ts";
 
 const SuccessfullyResponse = () => {
     const loading = useAppSelector((state) => state.weather.loading);
@@ -38,6 +37,18 @@ interface ContainerProps {
     $successfully: boolean | null;
     $fadeIn: Keyframes;
 };
+
+const fadeIn = keyframes`
+	from {
+		opacity: 0;
+		scale: 0;
+	}
+
+	to {
+		opacity: 1;
+		scale: 1;
+	}
+`;
 
 const Container = styled.section<ContainerProps>`
     display: ${({ $successfully }) => $successfully ? 'flex' : 'none'};

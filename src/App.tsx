@@ -4,6 +4,7 @@ import { GlobalStyle } from './styles/GlobalStyle.ts';
 import Display from './components/Display.tsx';
 import { useAppSelector } from './hooks/useAppSelector.ts';
 import NetworkError from './components/errors/NetworkError.tsx';
+import ApiError from './components/errors/ApiError.tsx';
 import networkErrorImg from './assets/img/noWifi.svg';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <>
         <GlobalStyle />
         <NetworkError />
+        <ApiError />
         <Container 
           $successfully={successfully} 
           $error={error}
