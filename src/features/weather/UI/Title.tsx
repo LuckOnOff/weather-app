@@ -1,5 +1,5 @@
 import React from "react";
-import { useAppSelector } from "../hooks/useAppSelector.ts";
+import { useAppSelector } from "../../../hooks/useAppSelector.ts";
 import styled from "styled-components";
 
 const Title = () => {

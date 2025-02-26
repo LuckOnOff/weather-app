@@ -1,15 +1,15 @@
 import React from "react";
 import styled, { css, keyframes } from "styled-components";
 import { Keyframes } from "styled-components/dist/types";
-import Spinner from "../UI/Spinner.tsx";
+import Spinner from "../../components/UI/Spinner.tsx";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
-import ForecastSlider from "../ForecastSlider/ForecastSlider.tsx";
-import Title from "../Title.tsx";
-import CurrentWeather from "./CurrentWeather.tsx";
+import ForecastSlider from "./Forecast/ForecastSlider.tsx";
+import Title from "./UI/Title.tsx";
+import CurrentWeather from "./currentWeather/CurrentWeather.tsx";
 import SelectedDayWeather from "./SelectedDayWeather.tsx";
-import BackToCurrentWeather from "../BackToCurrentWeather.tsx";
+import BackToCurrentWeather from "./UI/BackToCurrentWeather.tsx";
 
-const SuccessfullyResponse = () => {
+const Weather = () => {
     const loading = useAppSelector((state) => state.weather.loading);
     const successfully = useAppSelector((state) => state.weather.successfully);
 
@@ -31,7 +31,7 @@ const SuccessfullyResponse = () => {
     );
 };
 
-export default SuccessfullyResponse;
+export default Weather;
 
 interface ContainerProps {
     $successfully: boolean | null;

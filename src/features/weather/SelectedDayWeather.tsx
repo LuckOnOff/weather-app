@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import WeatherSummary from "./WeatherSummary.tsx";
+import WeatherSummary from "./shared/WeatherSummary.tsx";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import { getWeatherImgWithDescript } from "../../utils/getWeatherImgWithDescript.ts";
 import { isDayTime } from "../../utils/isDayTime.ts";

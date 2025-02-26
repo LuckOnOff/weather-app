@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { useAppSelector } from "../../hooks/useAppSelector.ts";
-import { getWindDirection } from "../../utils/getWind8ThDirection.ts";
-import cloudinessImg from "../../assets/img/cloudiness.svg";
-import humidityImg from "../../assets/img/humidity.svg";
-import pressureImg from "../../assets/img/pressure.svg";
-import windSpeedImg from "../../assets/img/wind.svg";
-import arrowWindDirection from "../../assets/img/windDirection.svg";
-import precipitationImg from "../../assets/img/precipitation.svg";
+import { useAppSelector } from "../../../hooks/useAppSelector.ts";
+import { getWindDirection } from "../../../utils/getWind8ThDirection.ts";
+import cloudinessImg from "../../../assets/img/cloudiness.svg";
+import humidityImg from "../../../assets/img/humidity.svg";
+import pressureImg from "../../../assets/img/pressure.svg";
+import windSpeedImg from "../../../assets/img/wind.svg";
+import arrowWindDirection from "../../../assets/img/windDirection.svg";
+import precipitationImg from "../../../assets/img/precipitation.svg";
 
 const WeatherDetails = () => {
     const currentForecast = useAppSelector((state) => state.weather.data?.current);

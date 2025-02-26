@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import styled, { css, keyframes } from "styled-components";
-import { HourlyForecast } from "../../types/WeatherResponse.ts";
-import showMore from "../../assets/img/showMore.svg";
-import widnSpeed from "../../assets/img/wind.svg";
-import precipitationImg from "../../assets/img/precipitation.svg"; 
-import humidityImg from "../../assets/img/humidity.svg";
+import { HourlyForecast } from "../../../types/WeatherResponse.ts";
+import showMore from "../../../assets/img/showMore.svg";
+import widnSpeed from "../../../assets/img/wind.svg";
+import precipitationImg from "../../../assets/img/precipitation.svg"; 
+import humidityImg from "../../../assets/img/humidity.svg";
 
 const SliderContentItem = ({ date, img, description }: SliderContentItemProps) => {
     const [isShowDetails, setIsShowDetails] = useState<boolean>(false);

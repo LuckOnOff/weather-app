@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import CurrentTime from "../CurrentTime.tsx";
-import WeatherSummary from "./WeatherSummary.tsx";
+import CurrentTime from "../UI/CurrentTime.tsx";
+import WeatherSummary from "../shared/WeatherSummary.tsx";
 import CurrentWeatherDetails from "./CurrentWeatherDetails.tsx";
-import { getWeatherImgWithDescript } from "../../utils/getWeatherImgWithDescript.ts";
-import { isDayTime } from "../../utils/isDayTime.ts";
-import { useAppSelector } from "../../hooks/useAppSelector.ts";
+import { getWeatherImgWithDescript } from "../../../utils/getWeatherImgWithDescript.ts";
+import { isDayTime } from "../../../utils/isDayTime.ts";
+import { useAppSelector } from "../../../hooks/useAppSelector.ts";
 
 const CurrentWeather = () => {
     const currentForecast = useAppSelector((state) => state.weather.data?.current);

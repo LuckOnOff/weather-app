@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useAppSelector } from "../hooks/useAppSelector.ts";
+import { useAppSelector } from "../../../hooks/useAppSelector.ts";
 
 const CurrentTime = () => {
 	const CurrentLocalTime = useAppSelector((state) => state.weather.localTime);

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import { useAppSelector } from "../hooks/useAppSelector.ts";
-import { useAppDispatch } from "../hooks/useAppDispatch.ts";
-import returnArrowImg from "../assets/img/returnArrow.svg";
-import { setSelectedDay } from "../features/weather/weatherSlice.ts";
+import { useAppSelector } from "../../../hooks/useAppSelector.ts";
+import { useAppDispatch } from "../../../hooks/useAppDispatch.ts";
+import { setSelectedDay } from "../weatherSlice.ts";
+import returnArrowImg from "../../../assets/img/returnArrow.svg";
 
 const BackToCurrentWeather = () => {
 	const selectedDay = useAppSelector((state) => state.weather.selectedDay);

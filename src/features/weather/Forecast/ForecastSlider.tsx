@@ -3,7 +3,7 @@ import styled, { css, keyframes } from "styled-components";
 import SliderContent from "./SliderContent.tsx";
 import SliderArrows from "./SliderArrows.tsx";
 import ShowPrevHours from "./ShowPrevHours.tsx";
-import { useAppSelector } from "../../hooks/useAppSelector.ts";
+import { useAppSelector } from "../../../hooks/useAppSelector.ts";
 
 const WeatherForecastSlider = () => {
     const sliderSection = useRef<HTMLDivElement | null>(null);

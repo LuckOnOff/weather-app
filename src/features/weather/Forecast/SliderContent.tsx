@@ -1,8 +1,8 @@
 import React from "react";
 import SliderContentItem from "./SliderContentItem.tsx";
-import { useAppSelector } from "../../hooks/useAppSelector.ts";
-import { isDayTime } from "../../utils/isDayTime.ts";
-import { getWeatherImgWithDescript } from "../../utils/getWeatherImgWithDescript.ts";
+import { useAppSelector } from "../../../hooks/useAppSelector.ts";
+import { isDayTime } from "../../../utils/isDayTime.ts";
+import { getWeatherImgWithDescript } from "../../../utils/getWeatherImgWithDescript.ts";
 
 const SliderContent = ({ 
     isMobile,

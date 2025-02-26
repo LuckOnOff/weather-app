@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
-import Error from "./Error.tsx";
+import Error from "./shared/Error.tsx";
 import apiErrorImg from "../../assets/img/apiError.svg";
 
 const ApiError = () => {

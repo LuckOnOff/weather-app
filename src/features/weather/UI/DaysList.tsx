@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import { useAppSelector } from "../hooks/useAppSelector.ts";
-import { useAppDispatch } from "../hooks/useAppDispatch.ts";
-import { setSelectedDay } from "../features/weather/weatherSlice.ts";
+import { useAppSelector } from "../../../hooks/useAppSelector.ts";
+import { useAppDispatch } from "../../../hooks/useAppDispatch.ts";
+import { setSelectedDay } from "../weatherSlice.ts";
 
 const dataTypeObj = {
 	0: 'сегодня',

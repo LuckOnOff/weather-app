@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from "react";
 import SearchComponent from "./Search.tsx";
 import Spinner from "./UI/Spinner.tsx";
 
-const Weather = lazy(() => import("./Weather/Weather.tsx"));
+const Weather = lazy(() => import("../features/weather/Weather.tsx"));
 
 const Display = () => {
 	return (
