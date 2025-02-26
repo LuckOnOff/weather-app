@@ -4,15 +4,15 @@ import { ResponsePlace } from "../../types/PlaceResponse.ts";
 export const fetchPlaces = createAsyncThunk(
 	'weather/fetchPlaces',
 	async (city: string) => {
-	  const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(city)}&format=json&addressdetails=1`);
+		const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(city)}&format=json&addressdetails=1`);
+	  
+		if (!response.ok) {
+			throw new Error('Ошибка запроса');
+		};
   
-	  if (!response.ok) {
-		throw new Error('Ошибка запроса');
-	  }
-  
-	  const data: ResponsePlace[] = await response.json();
+	  	const data: ResponsePlace[] = await response.json();
 
-	  return data;
+	  	return data;
 	}
 );
 

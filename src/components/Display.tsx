@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from "react";
-import SearchComponent from "./SearchComponent.tsx";
+import SearchComponent from "./Search.tsx";
 import Spinner from "./UI/Spinner.tsx";
 
 const Error404 = lazy(() => import("./Error404.tsx"));

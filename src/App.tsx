@@ -1,16 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { GlobalStyle } from './styles/GlobalStyle.ts';
 import Display from './components/Display.tsx';
 import { useAppSelector } from './hooks/useAppSelector.ts';
+import NetworkError from './components/errors/NetworkError.tsx';
+import networkErrorImg from './assets/img/noWifi.svg';
 
 function App() {
     const successfully = useAppSelector((state) => state.weather.successfully);
     const error = useAppSelector((state) => state.weather.error);
 
+    useEffect(() => {
+        const img = new Image();
+        
+        img.src = networkErrorImg; // предзагрузка изображения для отображения в компоненте NetworkError
+    }, []);
+
     return (
       <>
         <GlobalStyle />
+        <NetworkError />
         <Container 
           $successfully={successfully} 
           $error={error}
@@ -24,8 +33,8 @@ function App() {
 export default App;
 
 interface ContainerProps {
-  $successfully: boolean | null;
-  $error: string | null;
+    $successfully: boolean | null;
+    $error: string | null;
 };
 
 const Container = styled.section<ContainerProps>`
