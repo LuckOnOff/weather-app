@@ -137,7 +137,7 @@ const DetailsListItem = styled.li`
 `;
 
 const ItemImg = styled.img`
-    width: 2.4rem;
+    width: 2rem;
     margin-right: 0.5rem;
 `;
 

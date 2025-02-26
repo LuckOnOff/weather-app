@@ -19,9 +19,11 @@ const Title = () => {
 export default Title;
 
 const StyledTitle = styled.h1`
-    font-size: 2.5rem;
+    font-size: 2.25rem;
     text-align: center;
     margin-top: 1.2rem;
     letter-spacing: 0.1rem;
     word-break: break-word;
+    width: 60vw;
+    max-width: 25rem;
 `;

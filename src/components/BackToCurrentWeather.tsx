@@ -31,7 +31,7 @@ const Container = styled.div`
 	background: rgb(214 214 214);
 	position: absolute;
 	top: 2rem;
-	left: 0.5rem;
+    left: -0.3rem;
 	cursor: pointer;
 `;
 

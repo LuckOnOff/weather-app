@@ -4,10 +4,13 @@ import WeatherSummary from "./WeatherSummary.tsx";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import { getWeatherImgWithDescript } from "../../utils/getWeatherImgWithDescript.ts";
 import { isDayTime } from "../../utils/isDayTime.ts";
+import { convertTo24HourFormat } from "../../utils/convertTo24HourFormat.ts";
 import tempImg from "../../assets/img/temp.svg";
 import humidityImg from "../../assets/img/humidity.svg";
 import windSpeedImg from "../../assets/img/wind.svg";
 import precipitationImg from "../../assets/img/precipitation.svg";
+import sunriseImg from "../../assets/img/sunrise.svg";
+import sunsetImg from "../../assets/img/sunset.svg";
 
 const SelectedDayWeather = () => {
 	const dayForecast = useAppSelector((state) => state.weather.data?.forecast.forecastday);
@@ -16,23 +19,33 @@ const SelectedDayWeather = () => {
 
 	if(!dayForecast) return <div>Ошибка загрузки данных</div>;
 
-	const currentDay = selectedDay ? dayForecast[selectedDay].day : dayForecast[0].day;
+	const currentDay = selectedDay ? dayForecast[selectedDay] : dayForecast[0];
+	const forecastCurrentDay = currentDay.day;
 
-	const temp = Math.trunc(currentDay.avgtemp_c) + "°";
-	const imgId = currentDay.condition.code;
+	const temp = Math.trunc(forecastCurrentDay.avgtemp_c) + "°";
+	const imgId = forecastCurrentDay.condition.code;
 	const isDay = isDayTime(localTime || '');
 
 	const { img, description } = getWeatherImgWithDescript(imgId, isDay);
 
-	const maxTemp = Math.trunc(currentDay.maxtemp_c) + "°";
-	const minTemp = Math.trunc(currentDay.mintemp_c) + "°";
+	const maxTemp = Math.trunc(forecastCurrentDay.maxtemp_c) + "°";
+	const minTemp = Math.trunc(forecastCurrentDay.mintemp_c) + "°";
 
-	const maxWindSpeed = currentDay.maxwind_kph + " км/ч";
+	const maxWindSpeed = forecastCurrentDay.maxwind_kph + " км/ч";
 
-	const chanceRainOrSnow = Math.max(currentDay.daily_chance_of_rain, currentDay.daily_chance_of_snow) + "%";
-	const totalPrecip = currentDay.totalprecip_mm;
+	const chanceRainOrSnow = Math.max(forecastCurrentDay.daily_chance_of_rain, forecastCurrentDay.daily_chance_of_snow) + "%";
+	const totalPrecip = forecastCurrentDay.totalprecip_mm;
 	
-	const avgHumidity = currentDay.avghumidity + "%";
+	const avgHumidity = forecastCurrentDay.avghumidity + "%";
+
+	const sunrise = convertTo24HourFormat(currentDay.astro.sunrise);
+	const sunset = convertTo24HourFormat(currentDay.astro.sunset);
+
+	const repeatDetailsElements = [
+		{ id: 0, title: "влажность", src: humidityImg, alt: "влажность", text: avgHumidity },
+		{ id: 1, title: "восход", src: sunriseImg, alt: "восход", text: sunrise },
+		{ id: 2, title: "закат", src: sunsetImg, alt: "закат", text: sunset }
+	];
 
 	return (
 		<Container>
@@ -71,12 +84,14 @@ const SelectedDayWeather = () => {
 						</DetailValue>
 					</DoubleElementContainer>
 				</DetailsItem>
-				<DetailsItem title="влажность">
-					<DetailIcon src={humidityImg} alt="влажность" />
-					<DetailValue>
-						{avgHumidity}
-					</DetailValue>
-				</DetailsItem>
+				{repeatDetailsElements.map(item => (
+					<DetailsItem title={item.title}>
+						<DetailIcon src={item.src} alt={item.alt} />
+						<DetailValue>
+							{item.text}
+						</DetailValue>
+					</DetailsItem>
+				))}
 			</DetailsList>
 		</Container>
 	)
@@ -141,6 +156,7 @@ const DoubleElementContainer = styled.div`
 
 const DetailIcon = styled.img`
 	width: 2rem;
+	height: 2rem;
 	margin-right: 1rem;
 `;
 
