@@ -1,4 +1,4 @@
-/*! For license information please see main.77d2bed9.js.LICENSE.txt */
+/*! For license information please see main.20d6a3fc.js.LICENSE.txt */
 (()=>{var e={609:(e,t,n)=>{"use strict";n.d(t,{A:()=>o});n(43);var r=n(464),a=n(579);const o=()=>(0,a.jsx)(l,{children:(0,a.jsx)(u,{})}),l=r.Ay.section`
     display: flex;
     justify-content: center;
@@ -193,7 +193,7 @@ button {
 `,D=r.Ay.section`
     position: relative;
     width: 100%;
-`,j=(0,e.lazy)((()=>n.e(881).then(n.bind(n,881)))),I=()=>(0,m.jsxs)(m.Fragment,{children:[(0,m.jsx)(O,{}),(0,m.jsx)(e.Suspense,{fallback:(0,m.jsx)(o.A,{}),children:(0,m.jsx)(j,{})})]}),F=t=>{let{img:n,textOne:r,textTwo:a,alt:o,error:l}=t;return(0,e.useEffect)((()=>(document.body.style.overflowY=l?"hidden":"auto",()=>{document.body.style.overflowY="auto"})),[l]),l?(0,m.jsxs)(m.Fragment,{children:[(0,m.jsxs)(M,{children:[(0,m.jsx)(H,{onClick:()=>window.location.reload(),children:"\xd7"}),(0,m.jsx)(W,{src:n,alt:o}),(0,m.jsx)(U,{children:r}),(0,m.jsx)(U,{children:a})]}),(0,m.jsx)($,{})]}):null},M=r.Ay.section`
+`,j=(0,e.lazy)((()=>n.e(881).then(n.bind(n,881)))),I=()=>(0,m.jsxs)(m.Fragment,{children:[(0,m.jsx)(O,{}),(0,m.jsx)(j,{})]}),F=t=>{let{img:n,textOne:r,textTwo:a,alt:o,error:l}=t;return(0,e.useEffect)((()=>(document.body.style.overflowY=l?"hidden":"auto",()=>{document.body.style.overflowY="auto"})),[l]),l?(0,m.jsxs)(m.Fragment,{children:[(0,m.jsxs)(M,{children:[(0,m.jsx)(H,{onClick:()=>window.location.reload(),children:"\xd7"}),(0,m.jsx)(W,{src:n,alt:o}),(0,m.jsx)(U,{children:r}),(0,m.jsx)(U,{children:a})]}),(0,m.jsx)($,{})]}):null},M=r.Ay.section`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -245,4 +245,4 @@ button {
     margin: 1rem;
     transition: 0.5s linear;
 `;var Y=n(3);const X=(0,i.U1)({reducer:{weather:S.Ay,place:d}});var Z=function(e){document.addEventListener("visibilitychange",(function(){"hidden"===document.visibilityState&&e()}))},J=function(e){var t=!1;return function(){t||(e(),t=!0)}},ee=[],te=new Map,ne=[],re=function(e){var t=self.requestIdleCallback||self.setTimeout,n=-1;return e=J(e),"hidden"===document.visibilityState?e():(n=t(e),Z(e)),n},ae=[],oe=[],le=0,ie=new WeakMap,ue=new Map,se=-1,ce=function(){se<0&&(se=re(fe))},fe=function(){ue.size>10&&ue.forEach((function(e,t){te.has(t)||ue.delete(t)}));var e=ee.map((function(e){return ie.get(e.entries[0])})),t=oe.length-50;oe=oe.filter((function(n,r){return r>=t||e.includes(n)}));for(var n=new Set,r=0;r<oe.length;r++){var a=oe[r];de(a.startTime,a.processingEnd).forEach((function(e){n.add(e)}))}var o=ae.length-1-50;ae=ae.filter((function(e,t){return e.startTime>le&&t>o||n.has(e)})),se=-1};ne.push((function(e){e.interactionId&&e.target&&!ue.has(e.interactionId)&&ue.set(e.interactionId,e.target)}),(function(e){var t,n=e.startTime+e.duration;le=Math.max(le,e.processingEnd);for(var r=oe.length-1;r>=0;r--){var a=oe[r];if(Math.abs(n-a.renderTime)<=8){(t=a).startTime=Math.min(e.startTime,t.startTime),t.processingStart=Math.min(e.processingStart,t.processingStart),t.processingEnd=Math.max(e.processingEnd,t.processingEnd),t.entries.push(e);break}}t||(t={startTime:e.startTime,processingStart:e.processingStart,processingEnd:e.processingEnd,renderTime:n,entries:[e]},oe.push(t)),(e.interactionId||"first-input"===e.entryType)&&ie.set(e,t),ce()}));var de=function(e,t){for(var n,r=[],a=0;n=ae[a];a++)if(!(n.startTime+n.duration<e)){if(n.startTime>t)break;r.push(n)}return r};new Date;t.createRoot(document.getElementById("root")).render((0,m.jsx)(e.StrictMode,{children:(0,m.jsx)(Y.Kq,{store:X,children:(0,m.jsx)(Q,{})})}))})()})();
-//# sourceMappingURL=main.77d2bed9.js.map
+//# sourceMappingURL=main.20d6a3fc.js.map
