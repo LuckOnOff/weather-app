@@ -1,16 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import WeatherSummary from "./shared/WeatherSummary.tsx";
-import { useAppSelector } from "../../hooks/useAppSelector.ts";
-import { getWeatherImgWithDescript } from "../../utils/getWeatherImgWithDescript.ts";
-import { isDayTime } from "../../utils/isDayTime.ts";
-import { convertTo24HourFormat } from "../../utils/convertTo24HourFormat.ts";
-import tempImg from "../../assets/img/temp.svg";
-import humidityImg from "../../assets/img/humidity.svg";
-import windSpeedImg from "../../assets/img/wind.svg";
-import precipitationImg from "../../assets/img/precipitation.svg";
-import sunriseImg from "../../assets/img/sunrise.svg";
-import sunsetImg from "../../assets/img/sunset.svg";
+import WeatherSummary from "../shared/WeatherSummary.tsx";
+import { useAppSelector } from "../../../hooks/useAppSelector.ts";
+import { getWeatherImgWithDescript } from "../../../utils/getWeatherImgWithDescript.ts";
+import { isDayTime } from "../../../utils/isDayTime.ts";
+import { convertTo24HourFormat } from "../../../utils/convertTo24HourFormat.ts";
+import tempImg from "../../../assets/img/temp.svg";
+import humidityImg from "../../../assets/img/humidity.svg";
+import windSpeedImg from "../../../assets/img/wind.svg";
+import precipitationImg from "../../../assets/img/precipitation.svg";
+import sunriseImg from "../../../assets/img/sunrise.svg";
+import sunsetImg from "../../../assets/img/sunset.svg";
 
 const SelectedDayWeather = () => {
 	const dayForecast = useAppSelector((state) => state.weather.data?.forecast.forecastday);
@@ -85,7 +85,7 @@ const SelectedDayWeather = () => {
 					</DoubleElementContainer>
 				</DetailsItem>
 				{repeatDetailsElements.map(item => (
-					<DetailsItem title={item.title}>
+					<DetailsItem title={item.title} key={item.id}>
 						<DetailIcon src={item.src} alt={item.alt} />
 						<DetailValue>
 							{item.text}

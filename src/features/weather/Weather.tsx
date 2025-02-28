@@ -6,8 +6,8 @@ import { useAppSelector } from "../../hooks/useAppSelector.ts";
 import ForecastSlider from "./Forecast/ForecastSlider.tsx";
 import Title from "./UI/Title.tsx";
 import CurrentWeather from "./currentWeather/CurrentWeather.tsx";
-import SelectedDayWeather from "./SelectedDayWeather.tsx";
-import BackToCurrentWeather from "./UI/BackToCurrentWeather.tsx";
+import SelectedDayWeather from "./selectedDayWeather/SelectedDayWeather.tsx";
+import BackToCurrentWeather from "./selectedDayWeather/BackToCurrentWeather.tsx";
 
 const Weather = () => {
     const loading = useAppSelector((state) => state.weather.loading);

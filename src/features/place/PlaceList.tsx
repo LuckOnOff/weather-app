@@ -79,11 +79,11 @@ const fadeIn = keyframes`
 const DropdownContainer = styled.div<{ $successfully: boolean | null }>`
     position: absolute;
     top: 110%;
-    left: ${({ $successfully }) => ($successfully ? "29%" : "50%")};
+    left: ${({ $successfully }) => ($successfully ? "9.5rem" : "50%")};
     width: 16rem;
     transform: translateX(-50%);
     background: white;
-    border: 0.1rem solid #ddd;
+    border: 0.rem solid #ddd;
     border-radius: 0.3rem;
     box-shadow: 0 0.3rem 0.5rem rgba(0, 0, 0, 0.1);
     z-index: 1;

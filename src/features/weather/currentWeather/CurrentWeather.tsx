@@ -1,11 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import CurrentTime from "../UI/CurrentTime.tsx";
+import CurrentTime from "./CurrentTime.tsx";
 import WeatherSummary from "../shared/WeatherSummary.tsx";
 import CurrentWeatherDetails from "./CurrentWeatherDetails.tsx";
 import { getWeatherImgWithDescript } from "../../../utils/getWeatherImgWithDescript.ts";
 import { isDayTime } from "../../../utils/isDayTime.ts";
 import { useAppSelector } from "../../../hooks/useAppSelector.ts";
+import RepeatRequest from "./RepeatRequest.tsx";
 
 const CurrentWeather = () => {
     const currentForecast = useAppSelector((state) => state.weather.data?.current);
@@ -21,7 +22,10 @@ const CurrentWeather = () => {
 
 	return (
 		<>
-			<CurrentTime />
+            <Exp>
+                <CurrentTime />
+                <RepeatRequest />
+            </Exp>
             <BottomContainer>
                 <WeatherSummary 
                     img={img}
@@ -47,4 +51,11 @@ const BottomContainer = styled.div`
     @media (max-width: 480px) {
         flex-direction: column;
     }
+`;
+
+const Exp = styled.div`
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: 1.5rem 0 2rem;
 `;

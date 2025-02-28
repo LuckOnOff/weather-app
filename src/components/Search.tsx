@@ -5,13 +5,17 @@ import DaysList from "../features/weather/UI/DaysList.tsx";
 import { useAppDispatch } from "../hooks/useAppDispatch.ts";
 import { useAppSelector } from "../hooks/useAppSelector.ts";
 import { setClearPlaces, fetchPlaces } from "../features/place/placeSlice.ts";
-import { fetchWeather } from "../features/weather/weatherSlice.ts";
+import { fetchWeather, setTimerExpired } from "../features/weather/weatherSlice.ts";
 import gpsImg from "../assets/img/gps.svg";
+
+const timerDuraction = 5 * 60 * 1000; // таймер на 5 минут
 
 const SearchComponent = () => {
     const dispatch = useAppDispatch();
     
     const debounceRef = useRef<NodeJS.Timeout | null>(null);
+
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
     
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [showDropdown, setShowDropdown] = useState(false);
@@ -46,6 +50,22 @@ const SearchComponent = () => {
             dispatch(fetchWeather({ lat, lon }));
         }
     }, [lat, lon, dispatch]);
+
+    useEffect(() => {
+        if (successfully) {
+            dispatch(setTimerExpired(false));
+
+            if (timerRef.current) clearInterval(timerRef.current);
+            
+            timerRef.current = setInterval(() => {
+                dispatch(setTimerExpired(true));
+            }, timerDuraction);
+        }
+
+        return () => {
+            if (timerRef.current) clearInterval(timerRef.current);
+        };
+    }, [successfully, dispatch]);
 
     const handleChangeInputValue = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newValue = e.target.value;

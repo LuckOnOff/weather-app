@@ -9,6 +9,7 @@ interface WeatherState {
   successfully: boolean | null;
   selectedDay: number | null;
   localTime: string | null;
+  timerExpired: boolean;
 }
 
 const initialState: WeatherState = {
@@ -17,7 +18,8 @@ const initialState: WeatherState = {
   error: null,
   successfully: null,
   selectedDay: null,
-  localTime: null
+  localTime: null,
+  timerExpired: false
 };
 
 export const fetchWeather = createAsyncThunk(
@@ -44,6 +46,9 @@ const weatherSlice = createSlice({
     },
     setSelectedDay(state, action: PayloadAction<number | null>) {
       state.selectedDay = action.payload;
+    },
+    setTimerExpired(state, action: PayloadAction<boolean>) {
+      state.timerExpired = action.payload;
     }
   },
   extraReducers: (builder) => {
@@ -57,6 +62,7 @@ const weatherSlice = createSlice({
         state.successfully = true;
         state.data = action.payload;
         state.localTime = (state.data.location.localtime)?.split(' ')[1];
+        state.timerExpired = false;
 
         if (process.env.NODE_ENV === 'development') {
           console.log('data: ', state.data);
@@ -71,5 +77,5 @@ const weatherSlice = createSlice({
   },
 });
 
-export const { setWeatherData, setSelectedDay } = weatherSlice.actions;
+export const { setWeatherData, setSelectedDay, setTimerExpired } = weatherSlice.actions;
 export default weatherSlice.reducer;
