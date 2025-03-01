@@ -1,29 +1,40 @@
 import React from "react";
-import { useAppSelector } from "../../../hooks/useAppSelector.ts";
 import styled from "styled-components";
+import Favorites from "./Favorites.tsx";
+import { useAppSelector } from "../../../hooks/useAppSelector.ts";
 
 const Title = () => {
     const locationName = useAppSelector((state) => state.place.pickedPlace?.name);
 
+    console.log(locationName);
+
     if(!locationName) return <StyledTitle>Ошибка загрузки</StyledTitle>;
-    /* 
-        позже добавить сюда значок звездочку и хранить в localStorage
-    */
+
     return (
-        <StyledTitle>
-            {locationName}
-        </StyledTitle>
+        <RelativeContainer>
+            <Favorites locationName={locationName} />
+            <StyledTitle>
+                {locationName}
+            </StyledTitle>
+        </RelativeContainer>
     )
 };
 
 export default Title;
 
+const RelativeContainer = styled.div`
+    position: relative;
+`;
+
 const StyledTitle = styled.h1`
-    font-size: 2.25rem;
+    font-size: 2rem;
     text-align: center;
     margin-top: 1.2rem;
     letter-spacing: 0.1rem;
     word-break: break-word;
-    width: 60vw;
-    max-width: 25rem;
+    max-width: 21rem;
+
+    @media (max-width: 430px) {
+        max-width: 18rem;
+    }
 `;

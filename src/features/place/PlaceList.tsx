@@ -5,8 +5,9 @@ import { useAppDispatch } from "../../hooks/useAppDispatch.ts";
 import { setPickedPlace, setClearPlaces } from "../../features/place/placeSlice.ts";
 import { getTranslatePlaceType } from "../../utils/getTranslatePlaceType.ts";
 import { useAppSelector } from "../../hooks/useAppSelector.ts";
+import LocationData from "../../types/LocationData.ts";
 
-const PlaceList = ({ onClickClose, onClickClearInput }: PlaceListProps) => {
+const PlaceList = ({ onClickClose, onClickClearInput, searchQuery }: PlaceListProps) => {
     const dispatch = useAppDispatch();
     
     const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -15,6 +16,9 @@ const PlaceList = ({ onClickClose, onClickClearInput }: PlaceListProps) => {
     const places = useAppSelector((state) => state.place.places);
 
     const successfully = useAppSelector((state) => state.weather.successfully);
+
+    const storedFavorites = localStorage.getItem('favorites');
+    const favorites = storedFavorites ? JSON.parse(storedFavorites) : [];
 
     // закрытие списка при клике вне
     useEffect(() => {
@@ -50,6 +54,15 @@ const PlaceList = ({ onClickClose, onClickClearInput }: PlaceListProps) => {
                             </DropdownItem>
                         )
                     })
+                ) : (favorites.length && searchQuery.length === 0) ? (
+                    favorites.map((place: LocationData, index: number) => (
+                        <DropdownItem
+                            key={index} 
+                            onClick={() => handleSelectPlace(index)}
+                        >
+                            {place.name}
+                        </DropdownItem>
+                    ))
                 ) : (
                     <DropdownItem>Ничего не найдено</DropdownItem>
                 )
@@ -63,7 +76,8 @@ export default PlaceList;
 interface PlaceListProps {
     onClickClose: () => void;
     onClickClearInput: () => void;
-}
+    searchQuery: string;
+};
 
 const fadeIn = keyframes`
     from {

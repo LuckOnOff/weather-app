@@ -95,6 +95,7 @@ const SearchComponent = () => {
                 <PlaceList 
                     onClickClose={() => setShowDropdown(false)}
                     onClickClearInput={() => setSearchQuery('')}
+                    searchQuery={searchQuery}
                 />
             )}
         </SearchWrapper>

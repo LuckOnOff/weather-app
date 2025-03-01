@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ResponsePlace } from "../../types/PlaceResponse.ts";
+import LocationData from "../../types/LocationData.ts";
 
 export const fetchPlaces = createAsyncThunk(
 	'weather/fetchPlaces',
@@ -20,7 +21,7 @@ interface PlaceState {
 	places: ResponsePlace[] | null;
 	loading: boolean;
 	error: string | null;
-	pickedPlace: ResponsePlace | null;
+	pickedPlace: ResponsePlace | LocationData | null;
 	lon: string | null;
 	lat: string | null;
 };
@@ -42,10 +43,17 @@ const placeSlice = createSlice({
 			state.places = null;
 		},
 		setPickedPlace(state, action: PayloadAction<number>) {
+			const storedFavorites = localStorage.getItem('favorites');
+			const favorites: LocationData[] = storedFavorites ? JSON.parse(storedFavorites) : [];
+
 			if (state.places && state.places.length > action.payload) {
 				state.pickedPlace = state.places[action.payload];
 				state.lat = state.pickedPlace.lat;
 				state.lon = state.pickedPlace.lon;
+			} else if(favorites.length) {
+				state.pickedPlace = favorites[action.payload];
+				state.lat = state.pickedPlace.coords.lat;
+				state.lon = state.pickedPlace.coords.lon;
 			}
 		}		
 	},

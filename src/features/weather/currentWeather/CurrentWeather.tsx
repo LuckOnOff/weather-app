@@ -22,10 +22,10 @@ const CurrentWeather = () => {
 
 	return (
 		<>
-            <Exp>
+            <RelativeContainer>
                 <CurrentTime />
                 <RepeatRequest />
-            </Exp>
+            </RelativeContainer>
             <BottomContainer>
                 <WeatherSummary 
                     img={img}
@@ -53,9 +53,7 @@ const BottomContainer = styled.div`
     }
 `;
 
-const Exp = styled.div`
-    display: flex;
-    justify-content: center;
+const RelativeContainer = styled.div`
     position: relative;
     margin: 1.5rem 0 2rem;
 `;
