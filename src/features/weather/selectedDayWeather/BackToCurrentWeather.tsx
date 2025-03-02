@@ -33,6 +33,11 @@ const Container = styled.div`
 	top: 2rem;
     left: -0.3rem;
 	cursor: pointer;
+	transition: background 0.3s;
+
+	&:hover {
+        background: rgb(178, 178, 178);
+    }
 `;
 
 const ReturnArrow = styled.img`

@@ -44,7 +44,7 @@ const PlaceList = ({ onClickClose, onClickClearInput, searchQuery }: PlaceListPr
             {loading ? (
                 <Spinner />
             ) : (
-                places?.length ? (
+                (places?.length && searchQuery.length > 0) ? (
                     places.map((place, index) => {
                         const translatePlaceType = getTranslatePlaceType(place.type);
 

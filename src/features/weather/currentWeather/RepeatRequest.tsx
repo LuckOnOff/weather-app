@@ -23,7 +23,7 @@ const RepeatRequest = () => {
 	if(!timerExpired) return null;
 
     return (
-        <RepeatRequestContainer onClick={handleRefresh}>
+        <RepeatRequestContainer title="обновить прогноз" onClick={handleRefresh}>
             <RepeatRequestItem src={repeatRequest} alt="обновить прогноз" />
         </RepeatRequestContainer>
     )
@@ -56,6 +56,11 @@ const RepeatRequestContainer = styled.div`
 	top: -0.2rem;
 	left: 5rem;
 	animation: ${fadeIn} 0.5s ease-in-out;
+	transition: background 0.3s;
+
+	&:hover {
+        background:rgb(201, 201, 201);
+    }
 `;
 
 const RepeatRequestItem = styled.img`

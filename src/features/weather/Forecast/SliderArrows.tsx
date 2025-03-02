@@ -121,6 +121,11 @@ const BaseContainerArrow = css`
     border-radius: 0.5rem;
     cursor: pointer;
     z-index: 1;
+    transition: background 0.3s;
+
+	&:hover {
+        background:rgb(178, 178, 178);
+    }
 
     @media (max-width: 480px) {
         display: none;

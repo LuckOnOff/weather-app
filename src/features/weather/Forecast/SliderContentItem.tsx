@@ -83,7 +83,7 @@ const ItemContainer = styled.div`
     position: relative;
 
     &:hover {
-        border-color: lightgreen;
+        border-color: rgb(178, 178, 178);
     }
 
     &:nth-last-child(1) {

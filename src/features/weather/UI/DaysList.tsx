@@ -77,6 +77,11 @@ const Placeholder = styled.button`
 	min-width: 7rem;
 	width: 100%;
 	height: 100%;
+	transition: background 0.3s;
+
+	&:hover {
+        background: #f2f2f2;
+    }
 `;
 
 const fadeIn = keyframes`
@@ -117,4 +122,9 @@ const Day = styled.time`
 	min-height: 3.5rem;
 	height: 4.5rem;
 	cursor: pointer;
+	transition: background 0.3s;
+
+	&:hover {
+        background: #f2f2f2;
+    }
 `;
